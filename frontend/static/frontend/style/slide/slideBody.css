@@ -1,0 +1,62 @@
+html, body {
+    height: 100%;
+    width: 100%; 
+}
+
+.panes-container {  
+    height: 100%;
+    width: 100%;
+    padding-top: 45px; 
+    padding-bottom: 45px; 
+    display: flex; 
+}
+
+.panes-separator {
+    width: 10px;
+    background: #02203c;
+    cursor: col-resize;
+}
+
+.left-pane  {  
+    overflow-y: auto;  
+    width: 55%; 
+    height: 100%;  
+} 
+
+.right-pane {   
+    position: relative;  
+    background-color: black; 
+    flex: auto; 
+    display: flex;
+    flex-direction: column;
+    width: 45%; 
+    height: 100%;
+} 
+
+/************** Slides with no code **************/
+.slide-no-code {  
+    overflow-y: auto;
+    width: 100%;
+    height: 100%;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 16.5px;
+    line-height: 1.5;  
+    padding: 1.5% 5% 5% 5%;   
+} 
+
+.slide-no-code code {
+    font-family: Monaco, Menlo, "Ubuntu Mono", Consolas, source-code-pro, monospace;
+    font-size: 14px; 
+    color: #115791; 
+    background-color: rgba(196, 196, 196, .4);  
+} 
+/************** End slides with no code **************/
+
+.simplebar-scrollbar::before {
+    background-color: rgb(151, 151, 151) !important;
+}
+
+.slide-header { 
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 20px; 
+}

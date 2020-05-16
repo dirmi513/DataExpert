@@ -1,0 +1,90 @@
+.submit-answer-result-correct {
+    position: absolute;   
+    left: 6px; 
+    right: 6px; 
+    bottom: 6px;
+    height: 12%;  
+    color:white;
+    background-color: #02203c;
+    border: none;  
+    opacity: 0;
+    pointer-events:none; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    -webkit-transition: opacity .2s ease-in;
+    -moz-transition: opacity .2s ease-in;
+     -ms-transition: opacity .2s ease-in;
+      -o-transition: opacity .2s ease-in;
+         transition: opacity .2s ease-in;
+} 
+
+.submit-answer-result-wrong {
+    position: absolute;  
+    left: 6px; 
+    right: 6px; 
+    bottom: 6px; 
+    height: 12%;   
+    color:white;
+    background-color: #02203c;
+    border: none;  
+    opacity: 0;
+    pointer-events:none; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    -webkit-transition: opacity .2s ease-in;
+    -moz-transition: opacity .2s ease-in;
+     -ms-transition: opacity .2s ease-in;
+      -o-transition: opacity .2s ease-in;
+         transition: opacity .2s ease-in;
+} 
+
+.submit-answer-result-p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: #2EE59D;
+    margin: 0 0 0 15px;
+    user-select: none;
+} 
+
+.submit-answer-result-wrong-p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: red;
+    margin: 0 0 0 15px;
+    user-select: none;
+}
+
+.btn.btn-primary.shadow-none.submit-answer-next-slide-btn {
+    color: black; 
+    background-color: white;
+    border: none; 
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    height: 65%;
+    width: 25%; 
+} 
+
+.btn.btn-primary.shadow-none.submit-answer-next-slide-btn:hover {
+    background-color: #2EE59D; 
+    color: white; 
+}
+
+.close.submit-answer-result-close {
+    margin-bottom: 65px; 
+    margin-right: 3px; 
+    user-select: none;
+} 
+
+.close.submit-answer-result-close:focus {
+    outline: 0 !important;
+}
+
+.close.submit-answer-result-close span {
+    color: white;
+}
