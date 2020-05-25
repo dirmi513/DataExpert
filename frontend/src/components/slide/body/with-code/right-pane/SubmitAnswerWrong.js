@@ -1,7 +1,7 @@
 import React, {useEffect} from "react"    
 import "../../../../../../static/frontend/style/slide/submitAnswerResult.css"
 
-const SubmitAnswerCorrect = (props) => {    
+const SubmitAnswerWrong = (props) => {    
 
 	const dissolveSubmitAnswerPopup = () => {
 		document.querySelector(".submit-answer-result-wrong").style.opacity = "0"
@@ -35,4 +35,4 @@ const SubmitAnswerCorrect = (props) => {
 	)
 }
 
-export default SubmitAnswerCorrect 
+export default SubmitAnswerWrong 

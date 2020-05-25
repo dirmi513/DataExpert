@@ -6,7 +6,7 @@ const SubmitAnswerCorrect = (props) => {
 
 	const nextOnClick = (event) => { 
 		event.preventDefault()
-		const arr = codeUpdate(props.course, props.lesson, props.slide, props.coded, props.lessonData)  
+		const arr = codeUpdate(props.course, props.lesson, props.slide, props.coded, "TF", props.lessonData )  
 		const urlArr = props.nextSlideURL.split("/") 
 		const slide = urlArr[urlArr.length - 1]  
 		props.update(arr)
