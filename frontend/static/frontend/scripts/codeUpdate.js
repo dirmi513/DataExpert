@@ -1,7 +1,7 @@
 import updateLessonData from "./updateLessonData"
 import fetchPostRequest from "../scripts/fetchPostRequest"
 
-const codeUpdate = (course, lesson, slide, coded, correctAnswer, arr) => {    
+const codeUpdate = (course, lesson, slide, coded, correctAnswer, arr) => {     
     // If this is not a coded slide and the user clicks on one
     // of the top nav links or bottom nav links, set the completed
     // status of the slide to T in the db 

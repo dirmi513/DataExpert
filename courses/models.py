@@ -1,5 +1,4 @@
-from django.db import models
-from django.contrib.auth.models import User # User table of users 
+from django.db import models 
 from dataexpert.settings import AUTH_USER_MODEL  
 
 
@@ -100,4 +99,4 @@ class Slides(models.Model):
         return self.slideNumber
 
     def __str__(self):
-        return str(self.user) + ', ' +  str(self.cls) + ', ' + self.completed 
+        return str(self.user) + ', ' +  str(self.cls) + ', ' + str(self.completed)

@@ -35,7 +35,7 @@ class PostNewSlide(GenericAPIView):
             serializer.save()
             return Response('The slide was created successfully.', status=status.HTTP_201_CREATED)
         except Exception as e:
-            return Response(f'There was an errorL {e}', status=status.HTTP_400_BAD_REQUEST)
+            return Response(f'There was an error {e}', status=status.HTTP_400_BAD_REQUEST)
 
 
 class CorrectCodeToS3(GenericAPIView):
