@@ -31,8 +31,14 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-INSTALLED_APPS = [ 
-    'courses.apps.CoursesConfig', 
+INSTALLED_APPS = [
+    'authentication.apps.AuthenticationConfig',
+    'frontend.apps.FrontendConfig',
+    'courses.apps.CoursesConfig',
+
+    'rest_framework',
+    'django_rest_passwordreset',
+    
     'blog.apps.BlogConfig', 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,10 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'frontend',
-    'authentication',
-    'django_rest_passwordreset'
 ]
 
 REST_FRAMEWORK = {
