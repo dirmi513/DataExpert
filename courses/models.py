@@ -99,4 +99,4 @@ class Slides(models.Model):
         return self.slideNumber
 
     def __str__(self):
-        return str(self.user) + ', ' +  str(self.cls) + ', ' + str(self.completed)
+        return str(self.user) + ', ' + str(self.cls) + ', ' + str(self.completed)
