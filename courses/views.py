@@ -1,36 +1,25 @@
-import os 
-import re 
 import json
-from django.shortcuts import render
-from datetime import date 
-from .models import Slides, CourseLessonSlideMaster as CLSM
-from django.db.models import Max, Q 
-from django.template.loader import render_to_string
 from django.http import HttpResponse
 from . import aws_lambda
-from django.contrib.auth.decorators import login_required 
-from django.utils.safestring import mark_safe 
-from django.db.models import Max, Min 
-from django.urls import reverse 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
-from rest_framework.response import Response 
 from .utils.slide_utils import *
-from rest_framework.generics import GenericAPIView
-from rest_framework import serializers , status 
-from .serializers import CourseLessonSlideMasterSerializer, CorrectAnswerToS3Serializer, UpdateHTMLBodySerializer
+from rest_framework.generics import GenericAPIView, ListAPIView
+from rest_framework import status
+from .serializers import \
+    CourseLessonSlideMasterSerializer, CorrectAnswerToS3Serializer, UpdateHTMLBodySerializer
 from rest_framework.response import Response  
 
 
 class PostNewSlide(GenericAPIView):
-    """
+    """Create a new slide.
     """
     permission_classes = (IsAdminUser, )
     serializer_class = CourseLessonSlideMasterSerializer
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         try:
-            serializer = self.serializer_class(data = request.data)
+            serializer = self.serializer_class(data=request.data)
             serializer.is_valid(raise_exception=True) 
             serializer.save()
             return Response('The slide was created successfully.', status=status.HTTP_201_CREATED)
@@ -38,58 +27,74 @@ class PostNewSlide(GenericAPIView):
             return Response(f'There was an error {e}', status=status.HTTP_400_BAD_REQUEST)
 
 
-class CorrectCodeToS3(GenericAPIView):
+def save_clsm_data(request, serializer_class, return_data=False):
+    """Updates an instance of CLSM in the database. Returns the HTTP POST request's data
+        and the cls of the instance if specified.
     """
-    """
-    permission_classes = (IsAdminUser, )
-    serializer_class = CorrectAnswerToS3Serializer
-
-    def post(self, request, *args, **kwargs): 
-        data = request.data.dict()
-        _cls = int(data['cls'])
-        clsm_inst = CLSM.objects.get(cls=_cls)
-        serializer = self.serializer_class(clsm_inst, data = request.data)
-        serializer.is_valid(raise_exception=True) 
-        serializer.save()
-        lambda_response = aws_lambda.execute(data['correctAnswer'], 'F', _cls, 'T') 
-        lambda_response_dic = json.loads(lambda_response) 
-        upload_status = lambda_response_dic['Status']
-        if upload_status == 'Success':
-            return Response('Success', status=status.HTTP_200_OK)
-        else:
-            return Response(f'There was an error: {upload_status}', status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    data = request.data.dict()
+    _cls = int(data['cls'])
+    clsm_instance = CLSM.objects.get(cls=_cls)
+    serializer = serializer_class(clsm_instance, data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+    return data, _cls if return_data else None
 
 
 class UpdateHTMLBody(GenericAPIView):
-    """
+    """Update the HTML body for the specified slide.
     """
     permission_classes = (IsAdminUser, )
     serializer_class = UpdateHTMLBodySerializer
 
-    def post(self, request, *args, **kwargs): 
+    def post(self, request):
         try:
-            data = request.data.dict()
-            _cls = int(data['cls'])
-            clsm_inst = CLSM.objects.get(cls=_cls)
-            serializer = self.serializer_class(clsm_inst, data = request.data)
-            serializer.is_valid(raise_exception=True) 
-            serializer.save()
+            save_clsm_data(request, self.serializer_class)
             return Response('Success', status=status.HTTP_200_OK)
         except Exception as e:
             return Response(f'There was an error: {e}', status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
-@permission_classes((IsAdminUser, ))
-def get_html_body(request): 
+class GetHTMLBody(ListAPIView):
+    """Return's a certain slide's HTML body.
+
+    You must specify the cls as a parameter when hitting the REST endpoint:
+        e.g. http://localhost:8000/courses/api/get-html-body?cls=111
     """
+    permission_classes = (IsAdminUser, )
+    serializer_class = CourseLessonSlideMasterSerializer
+
+    def get_queryset(self):
+        _cls = self.request.query_params.get('cls')
+        if not _cls:
+            return None
+        self.queryset = CLSM.objects.filter(cls=_cls)
+        return self.queryset
+
+    def get(self, request, *args, **kwargs):
+        data = self.get_queryset()
+        if not data:
+            error_message = 'CLS is missing from the request.'
+            return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data.values('htmlBody')[0], status=status.HTTP_200_OK)
+
+
+class CorrectAnswerToS3(GenericAPIView):
+    """Saves the correct answer for a slide's coding challenge to the database and uploads
+        the answer to the dataexpert.correct.answers S3 bucket.
     """
-    try:  
-        _cls = request.data['cls'] 
-        html = CLSM.objects.filter(cls=_cls).values('htmlBody')[0]['htmlBody']
-        return Response(html, status=status.HTTP_200_OK)
-    except Exception as e:
-        return Response(f'There was an error: {e}', status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (IsAdminUser, )
+    serializer_class = CorrectAnswerToS3Serializer
+
+    def post(self, request):
+        data, _cls = save_clsm_data(request, self.serializer_class, True)
+        lambda_response = aws_lambda.execute(data['correctAnswer'], 'F', _cls, 'T')
+        lambda_response_dic = json.loads(lambda_response)
+        upload_status = lambda_response_dic['Status']
+        if upload_status == 'Success':
+            return Response({'status': 'success'}, status=status.HTTP_200_OK)
+        else:
+            return Response({'status': f'There was an error: {upload_status}'},
+                            status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['GET'])
@@ -107,7 +112,7 @@ def course_info(request):
     data = []
     distinct_courses = CLSM.objects.values('course', 'courseNumber').distinct()
     courses = [[dic['course'], dic['courseNumber']] for dic in distinct_courses] 
-    courses.sort(key = lambda x: x[1])
+    courses.sort(key=lambda x: x[1])
     courses = [course[0] for course in courses]
     for index, course in enumerate(courses):
         course_dic = {
