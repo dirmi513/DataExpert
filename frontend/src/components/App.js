@@ -1,4 +1,5 @@
-import React from "react" 
+import React from "react"
+import Blog from "./blog"
 import Courses from "./Courses" 
 import Slide from "./slide/Slide"
 import Login from "./authentication/Login"
@@ -28,20 +29,24 @@ const App = () => {
 
 			<Route exact path="/logout/">
 				<Logout />
-			</Route> 
-
-			<Route exact path="/reset-password/:token">
-				<PasswordResetConfirm />
 			</Route>
 
 			<Route exact path="/courses/">
 				<Courses />
-			</Route> 
+			</Route>
+
+			<Route exact path="/blog/">
+				<Blog />
+			</Route>
 
 			<Route 
 				path="/courses/:course/:lesson/:slide/" 
 				component={Slide} 
-			/> 
+			/>
+
+			<Route exact path="/reset-password/:token">
+				<PasswordResetConfirm />
+			</Route>
 
 		</Switch> 
 		</>
