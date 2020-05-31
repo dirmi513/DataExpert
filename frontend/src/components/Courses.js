@@ -10,7 +10,7 @@ const Courses = () => {
 	const [courseData, setCourseData] = useState([])
 
 	const completedLessonCheck = (completed) => {
-		if (completed == "T") { 
+		if (completed === "T") {
 			return <i className="check material-icons">check_circle_outline</i> 
 		}
 	}
