@@ -1,10 +1,8 @@
-# DataExpert
-Data Analytics E-Learning Website.
+# DataExpert 
 
-For all the commands below, if you are using a Windows machine, then replace `pip3` with `pip`, and `python3` with
- `python`.
-
-To run the application locally:
+To run the application locally (for all the commands below, if you are using a Windows machine, then replace `pip3
+` with `pip`, and `python3` with
+                                 `python`):
 * Clone the repository on your local machine: `git clone https://github.com/dirmi513/DataExpert.git` 
     * I highly recommend that you create and use a Python virtual environment for running the app locally. Before
      cloning the repository, do the following:
