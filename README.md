@@ -27,6 +27,7 @@ To run the application locally (for all the commands below, if you are using a W
    DataExpert repo. Run `npm install`, which should install all the packages in the package.json file (all necessary
     javascript dependencies for the frontend).
   * If you make any changes to the Javascript/CSS files within the frontend app, make sure to run `npm run dev` before running `python3 manage.py runserver`.
+* Run: `python3 manage.py migrate`
 * Create a superuser with your credentials so that you can log in to DataExpert and view slides, as well as access
  protected API endpoints, and add/modify/delete
  slides and blog posts. Execute `python3 manage.py createsuperuser`, which will then prompt you to enter an email
