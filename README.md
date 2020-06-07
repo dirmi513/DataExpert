@@ -27,16 +27,31 @@ To run the application locally (for all the commands below, if you are using a W
    DataExpert repo. Run `npm install`, which should install all the packages in the package.json file (all necessary
     javascript dependencies for the frontend).
   * If you make any changes to the Javascript/CSS files within the frontend app, make sure to run `npm run dev` before running `python3 manage.py runserver`.
+* Add the following environment variables (to get the values for the variables, please reach out to me):
+    * `DATAEXPERT_GMAIL_PWD`
+    * `DATAEXPERT_LAMBDA_EXECUTOR_AWS_ACCESS_KEY`
+    * `DATAEXPERT_LAMBDA_EXECUTOR_AWS_SECRET_KEY`
+    * How you add environment variables depends on the machine you are using.  For Macs, you can set an environment
+     variable by:
+        * Opening a command line terminal and running `vim ~/.bash_profile`, which will allow you to edit the
+         .bash_profile file.
+        * Click the `i` key, and you should see `-- INSERT --` at the bottom of the terminal.
+        * Scroll down to the end of the terminal window, create a new line, and on that new line type in `export
+         NAME_OF_ENVIRONMENT_VARIABLE="value"` - for each variable, do this on a new line.
+        * Press the `esc` key, then type in `:wq` and press the `return` button.  This will save your changes and get
+         you out of editing the .bash_profile file.
+        * After creating the variables, you will have to open a new command line terminal to be able to utilize the
+         variables.
 * Run: `python3 manage.py migrate`
+* Dump the data from the [db.json](https://github.com/dirmi513/DataExpert-Material/blob/master/db.json) file (in the
+ DataExpert-Material GitHub repo) into the database: `python3 manage.py loaddata db.json`.  If the db.json file is
+  not in the current directory (which it shouldn't be because it is obtained from a different repo), update the
+   command: `python3 manage.py loaddata path/to/db.json`.
 * Create a superuser with your credentials so that you can log in to DataExpert and view slides, as well as access
  protected API endpoints, and add/modify/delete
  slides and blog posts. Execute `python3 manage.py createsuperuser`, which will then prompt you to enter an email
  , name, and password.  The email and password are your credentials to sign in to DataExpert and be able to view the
   slides.  Once logged in, you can also access the various REST API endpoints for slides and blog posts.
-* Dump the data from the [db.json](https://github.com/dirmi513/DataExpert-Material/blob/master/db.json) file (in the
- DataExpert-Material GitHub repo) into the database: `python3 manage.py loaddata db.json`.  If the db.json file is
-  not in the current directory (which it shouldn't be because it is obtained from a different repo), update the
-   command: `python3 manage.py loaddata path/to/db.json`.
 * Execute `python3 manage.py runserver` from the command line, which ["starts a lightweight development Web
  server
  on the local machine. By default, the server runs on port 8000 on the IP address 127.0.0.1."](https://docs.djangoproject.com/en/3.0/ref/django-admin/#runserver)

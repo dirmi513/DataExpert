@@ -1,6 +1,6 @@
 import React, {useState} from "react" 
 import {Link, useParams} from "react-router-dom"
-import axios from "axios" 
+import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest"
 import TopNav from "../TopNav"
 import "../../../static/frontend/style/passwordResetConfirm.css"
 
@@ -15,7 +15,7 @@ const PasswordResetConfirm = () => {
 	const handleChange = (event) => {
 		const name = event.target.name
 		const val = event.target.value 
-		if(name == "password") {
+		if(name === "password") {
 			setPassword(val)
 		} 
 	}  
@@ -23,31 +23,29 @@ const PasswordResetConfirm = () => {
 	const handleSubmit = async (event) => {
 		event.preventDefault()
 		setButtonLoad(true)
-		try {
-			await axios.post("/api/reset-password/confirm/", {
-				password: password,
-				token: token
-			}) 
-			setUnderButtonText("success")
-			setButtonLoadComplete(true)
-		}catch(error) { 
-			console.log(error.response)
-			setUnderButtonText("error")
-			try {   
-				setErrorMessage(error.response.data.password[0]) 
-			}catch {
-				try{
-					const message = error.response.data.status
-					if(message == "notfound" || message == "expired"){
-						setErrorMessage("Your password reset token has expired.")
-					}
-				}catch{
-					setErrorMessage("There was an error resetting your password.")
-				} 
-			}finally {
-				setButtonLoadComplete(true) 
-			} 
+		const url = "/api/reset-password/confirm/"
+		const data = {
+			password: password,
+			token: token
 		}
+		const response = await fetchPostRequest(url, data)
+		if (response.status === 200) {
+			setUnderButtonText("success")
+		}else {
+			const genericErrorMessage = "There was an error resetting your password. Please try again later."
+			const responseMessage = await response.json()
+			if (response.status === 400) {
+				if ('password' in responseMessage) {
+					setErrorMessage(responseMessage.password[0])
+				}else {
+					setErrorMessage(genericErrorMessage)
+				}
+			}else {
+				setErrorMessage(genericErrorMessage)
+			}
+			setUnderButtonText("error")
+		}
+		setButtonLoadComplete(true)
 	}
 
 	const buttonOrText = () => {
@@ -72,19 +70,16 @@ const PasswordResetConfirm = () => {
 					</> 
 				)
 			}else {
-				if(underButtonText == "success") {
+				if(underButtonText === "success") {
 					return ( 
 						<p>
 							Password successfully reset. <Link to="/login/">Login</Link>
 						</p> 
 					)
-				}else if(underButtonText == "error") {
-					if(errorMessage == "Your password reset token has expired." || errorMessage == "There was an error resetting your password.") {
-						return ( <p> {errorMessage}  </p> )
-					}
+				}else if(underButtonText === "error") {
 					return (
 						<p>
-							{errorMessage} Please try <a href="#" onClick={() => setButtonLoad(false)}>again</a>
+							{errorMessage}
 						</p>
 					)
 				}

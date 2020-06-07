@@ -2,8 +2,8 @@ import React from "react"
 import {Link} from "react-router-dom" 
 import "../../static/frontend/style/navbar.css" 
 
+
 const TopNav = (props) => {
-	console.log(props)
 	const authenticated = () => {
 		if(props.authenticated) {
 			return (
