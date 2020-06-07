@@ -9,13 +9,14 @@ const Login = () => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [resetPassword, setResetPassword] = useState(false)
+	const [incorrectInfo, setIncorrectInfo] = useState(false)
 
 	const handleChange = (event) => {
 		const name = event.target.name
 		const val = event.target.value 
-		if(name == "email") {
+		if(name === "email") {
 			setEmail(val)
-		} else if(name == "password") {
+		} else if(name === "password") {
 			setPassword(val)
 		}
 	}
@@ -31,13 +32,35 @@ const Login = () => {
 		if(response.status === 200) {
 			window.location.href = "/courses/"
 		}else if(response.status === 401) {
-			alert("Incorrect email and/or password. Please try again.")
+			setIncorrectInfo(true)
 		}
+	}
+
+	const handleIncorrectInfo = (event, bool) => {
+		event.preventDefault()
+		setIncorrectInfo(bool)
 	}
 
 	const handleResetClick = (event, bool) => { 
 		event.preventDefault()
 		setResetPassword(bool)
+	}
+
+	const logInError = () => {
+		if (incorrectInfo) {
+			return (
+				<p>
+					Incorrect email and/or password.
+					<br />
+					Please <a href="#" onClick={(e) => handleIncorrectInfo(e, false)}>try again</a>
+				</p>
+			)
+		}
+		return (
+			<button className="btn btn-lg btn-primary btn-block" id="login-btn" type="submit">
+				Log In
+			</button>
+		)
 	}
 
 	return (
@@ -53,7 +76,6 @@ const Login = () => {
 				<p>
 					Need an account? <Link to="/signup/">Sign up</Link> 
 				</p>
-				<label className="sr-only"></label>
 				<input 
 					type="email"  
 					className="form-control" 
@@ -62,17 +84,14 @@ const Login = () => {
 					onChange={handleChange}
 					required autoFocus 
 				/>
-				<label className="sr-only"></label>
 					<input 
 						type="password"  
 						className="form-control" 
 						placeholder="Password" 
 						name="password" 
 						onChange={handleChange}
-						required />  
-				<button className="btn btn-lg btn-primary btn-block" id="login-btn" type="submit">
-					Log In
-				</button> 
+						required />
+				{logInError()}
 				<p>
 					Forgot your password? <a href="#" onClick={(e) => handleResetClick(e, true)}>Reset Password</a> 
 				</p>

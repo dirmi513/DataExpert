@@ -1,54 +1,67 @@
 import React, {useState} from "react"
-import axios from "axios" 
 import {Link} from "react-router-dom"
 import TopNav from "../TopNav"
-import "../../../static/frontend/style/signup.css" 
+import "../../../static/frontend/style/signup.css"
+import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest";
 
 const Signup = () => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [name, setName] = useState("")
 	const BASE_URL = "http://localhost:8000"
+	const [incorrectInfo, setIncorrectInfo] = useState(false)
+	const [incorrectInfoMessage, setIncorrectInfoMessage] = useState("")
 
 	const handleChange = (event) => {
 		const name = event.target.name
 		const val = event.target.value 
-		if(name == "email") {
+		if(name === "email") {
 			setEmail(val)
-		} else if(name == "password") {
+		}else if(name === "password") {
 			setPassword(val)
-		} else if(name == "name") {
+		}else if(name === "name") {
 			setName(val)
 		}
 	}
 
 	const handleSubmit = async (event) => {
-		event.preventDefault() 
-		try {
-			const response = await axios.post(`${BASE_URL}/api/user/create/`, {
-				email: email,
-				password: password,
-				name: name,
-				headers: { 
-					"Content-Type": "application/json",
-					"accept": "application/json"
-				}
-			}) 
-			if(response.status == 201) { 
-				window.location.href = "/login/"
-			}  
-		} catch (error) {
-			const errResponse = error.response 
-			try{
-				if(errResponse.data.email[0] == "Enter a valid email address.") { 
-					alert("Please enter a valid email address.")
-				}else{
-					alert(errResponse.data) 
-				} 
-			}catch{ 
-				alert(errResponse.data)
-			}
+		event.preventDefault()
+		const url = `${BASE_URL}/api/user/create/`
+		const data = {
+			email: email,
+			password: password,
+			name: name
 		}
+		const response = await fetchPostRequest(url, data)
+		if(response.status === 201) {
+			window.location.href = "/login/"
+		}else if(response.status === 400) {
+			const errorMessage = await response.json()
+			setIncorrectInfoMessage(errorMessage)
+			setIncorrectInfo(true)
+		}
+	}
+
+	const setIncorrectInfoHandler = (event, bool) => {
+		event.preventDefault()
+		setIncorrectInfo(bool)
+	}
+
+	const handleIncorrectInfo = () => {
+		if (incorrectInfo) {
+			return (
+				<p>
+					{incorrectInfoMessage}
+					<br />
+					<a href="#" onClick={(e) => setIncorrectInfoHandler(e, false)}>Try again</a>
+				</p>
+			)
+		}
+		return (
+			<button className="btn btn-lg btn-primary btn-block" type="submit">
+				Sign up
+			</button>
+		)
 	}
 
 	return (
@@ -90,9 +103,7 @@ const Signup = () => {
 						name="password" 
 						onChange={handleChange}
 						required />  
-				<button className="btn btn-lg btn-primary btn-block" type="submit">
-					Sign up 
-				</button>
+				{handleIncorrectInfo()}
 			</form>
 		</div>
 		</>
