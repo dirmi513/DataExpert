@@ -33,7 +33,7 @@ const TopNavSlide = (props) => {
 						onClick={() => onClick(slide.name)}
 					> 
 					{slide.number} {slide.name} 
-						{slide.completed == "T" ?
+						{slide.completed === "T" ?
 						<i className="check material-icons"> 
 							check_circle_outline 
 						</i> :
@@ -46,13 +46,13 @@ const TopNavSlide = (props) => {
 
 	return (    
 		<div className="navbar top-nav" id="top-nav">
-			<Link to="/courses/" id="courses">Courses</Link> 
-			<div className="dropdown">
-				<button className="dropDownButton">Lesson : {props.lesson} </button>
-				<div className="dropdownContent" id="dropdownContent">
-					{slideDropdown}
+			<Link to="/app/courses/" id="courses">Courses</Link>
+				<div className="dropdown">
+					<button className="dropDownButton">Lesson : {props.lesson} </button>
+					<div className="dropdownContent" id="dropdownContent">
+						{slideDropdown}
+					</div>
 				</div>
-			</div> 
 			<Link to="/logout/" id="logout">Logout</Link> 
 		</div>    
 	) 

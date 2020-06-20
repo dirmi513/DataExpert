@@ -7,7 +7,7 @@ const BottomNavSlide = (props) => {
 	const onClick = (nextSlideStr, nextSlideURL) => { 
 		const arr = codeUpdate(props.course, props.lesson, props.slide, 
 			props.coded, props.correctAnswer, props.lessonData) 
-		if (nextSlideStr != "Next Slide" && nextSlideStr != "Previous Slide") {
+		if (nextSlideStr !== "Next Slide" && nextSlideStr !== "Previous Slide") {
 			window.location.href = nextSlideURL
 		} else {
 			const urlArr = nextSlideURL.split("/") 

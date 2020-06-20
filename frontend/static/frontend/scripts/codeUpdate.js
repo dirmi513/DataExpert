@@ -6,7 +6,7 @@ const codeUpdate = (course, lesson, slide, coded, correctAnswer, arr) => {
     // of the top nav links or bottom nav links, set the completed
     // status of the slide to T in the db 
     if (coded !== "T" || (coded === "T" && correctAnswer === null)) {
-        const url = "/courses/api/slide-no-code-completed/"
+        const url = "/app/courses/api/slide-no-code-completed/"
         const data = {
             course: course,
             lesson: lesson,
@@ -18,7 +18,7 @@ const codeUpdate = (course, lesson, slide, coded, correctAnswer, arr) => {
     // in the db to whatever is in the text editor at the time they leave
     // the slide 
     }else {
-        const url = "/courses/api/code-update/"
+        const url = "/app/courses/api/code-update/"
         const code = ace.edit("ace-editor").getValue()    
         const data = {
             course: course,

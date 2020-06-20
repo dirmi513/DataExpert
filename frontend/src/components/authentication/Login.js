@@ -1,15 +1,28 @@
-import React, {useState} from "react" 
-import {Link} from "react-router-dom"  
+import React, {useState, useEffect} from "react"
 import PasswordResetToken from "./PasswordResetToken"
-import TopNav from "../TopNav"
-import "../../../static/frontend/style/login.css" 
+import Signup from "./Signup"
 import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest"
+import "../../../static/frontend/style/auth/login.css"
+import "../../../static/frontend/style/auth/auth.css"
 
-const Login = () => {
+
+const Login = (props) => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [resetPassword, setResetPassword] = useState(false)
 	const [incorrectInfo, setIncorrectInfo] = useState(false)
+	const [signup, setSignup] = useState(false)
+
+	useEffect(() => {
+		// Check if the user is already logged in
+		const checkLoggedIn = async () => {
+			const response = await fetch("/app/courses/api/get-courses-info/")
+			if (response.status === 200) {
+				window.location.href = "/app/courses/"
+			}
+		}
+		checkLoggedIn()
+	}, [])
 
 	const handleChange = (event) => {
 		const name = event.target.name
@@ -30,7 +43,7 @@ const Login = () => {
 		}
 		const response = await fetchPostRequest(url, data)
 		if(response.status === 200) {
-			window.location.href = "/courses/"
+			window.location.href = "/app/courses/"
 		}else if(response.status === 401) {
 			setIncorrectInfo(true)
 		}
@@ -39,11 +52,6 @@ const Login = () => {
 	const handleIncorrectInfo = (event, bool) => {
 		event.preventDefault()
 		setIncorrectInfo(bool)
-	}
-
-	const handleResetClick = (event, bool) => { 
-		event.preventDefault()
-		setResetPassword(bool)
 	}
 
 	const logInError = () => {
@@ -63,41 +71,69 @@ const Login = () => {
 		)
 	}
 
+	const handleResetPasswordClick = (event, bool) => {
+		// When user clicks Reset Password button
+		event.preventDefault()
+		setResetPassword(bool)
+	}
+
+	const submitClick = (event, bool) => {
+		// When user clicks on the Sign up button
+		event.preventDefault()
+		setSignup(bool)
+	}
+
 	return (
 		<>
-		<TopNav authenticated={false}/>
+		<div className="auth-container" onClick={() => props.updateLogIn()}></div>
+		<div className="auth-form-animate">
 		{resetPassword ?
-		<PasswordResetToken resetFunc={handleResetClick} /> : 
-		<div className="text-center">
-			<form className="form-signin" onSubmit={handleSubmit}> 
+		<PasswordResetToken resetFunc={handleResetPasswordClick} /> :
+		signup ?
+			<Signup resetFunc={submitClick} /> :
+			<>
+			<form className="auth-form" id="login-form" onSubmit={handleSubmit}>
 				<h1 className="h3 mb-3 font-weight-normal">
 					Please Login
 				</h1>
 				<p>
-					Need an account? <Link to="/signup/">Sign up</Link> 
+					Need an account?
+					<a
+						href="#"
+						onClick={(e) => {submitClick(e, true)}}
+					>
+						Sign up
+					</a>
 				</p>
-				<input 
-					type="email"  
-					className="form-control" 
-					placeholder="Email" 
+				<input
+					type="email"
+					className="form-control"
+					placeholder="Email"
 					name="email"
 					onChange={handleChange}
-					required autoFocus 
+					required autoFocus
 				/>
-					<input 
-						type="password"  
-						className="form-control" 
-						placeholder="Password" 
-						name="password" 
-						onChange={handleChange}
-						required />
+				<input
+					type="password"
+					className="form-control"
+					placeholder="Password"
+					name="password"
+					onChange={handleChange}
+					required />
 				{logInError()}
 				<p>
-					Forgot your password? <a href="#" onClick={(e) => handleResetClick(e, true)}>Reset Password</a> 
+					Forgot your password?
+					<a
+						href="#"
+						onClick={(e) => handleResetPasswordClick(e, true)}
+					>
+						Reset Password
+					</a>
 				</p>
 			</form>
+			</>
+		}
 		</div>
-		} 
 		</>
 	)
 }

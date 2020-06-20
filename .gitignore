@@ -8,6 +8,7 @@
 .idea/
 .tox/
 __pycache__
+courses/utils/__pycache__
 MANIFEST
 dist/
 docs/_build/

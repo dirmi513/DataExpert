@@ -1,8 +1,9 @@
 import React, {useState} from "react" 
 import {Link, useParams} from "react-router-dom"
 import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest"
-import TopNav from "../TopNav"
-import "../../../static/frontend/style/passwordResetConfirm.css"
+import "../../../static/frontend/style/auth/passwordResetConfirm.css"
+import "../../../static/frontend/style/auth/auth.css"
+
 
 const PasswordResetConfirm = () => {
 	const [password, setPassword] = useState("") 
@@ -95,20 +96,19 @@ const PasswordResetConfirm = () => {
 
 	return (
 		<>
-		<TopNav authenticated={false}/>
-		<div className="text-center"> 
-			<form className="form-password-reset" onSubmit={(e) => handleSubmit(e)}>  
+		<div className="auth-container">
+			<form className="auth-form" id="password-form" onSubmit={(e) => handleSubmit(e)}>
 				<h1 className="h3 mb-3 font-weight-normal">
 					Enter New Password
-				</h1>  
+				</h1>
 				<label className="sr-only"> </label>
-					<input 
-						type="password"  
-						className="form-control" 
-						placeholder="Password" 
-						name="password" 
+					<input
+						type="password"
+						className="form-control"
+						placeholder="Password"
+						name="password"
 						onChange={handleChange}
-						required />  
+						required />
 				{buttonOrText()}
 			</form>
 		</div>

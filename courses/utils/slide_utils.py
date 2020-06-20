@@ -63,27 +63,31 @@ def slide_bottom_nav(slide_num, num_slides, slide_instances, _cls):
 		'next_slide': 'Next Slide', 
 		'next_slide_url': '#'
 	}  
-	if slide_num == 1 or (slide_num > 1 and slide_num < num_slides): 
+	if slide_num == 1 or (1 < slide_num < num_slides):
 		next_slide = slide_instances.filter(slideNumber=slide_num+1)[0]
-		next_slide_url = os.path.join('/courses/', next_slide.get_course(), next_slide.get_lesson(), next_slide.get_slide())
+		next_slide_url = os.path.join('/app/courses/', next_slide.get_course(), next_slide.get_lesson(),
+									  next_slide.get_slide())
 		bottom_nav['next_slide_url'] = next_slide_url 
 	if slide_num > 1: 
 		prev_slide = slide_instances.filter(slideNumber=slide_num-1)[0]
-		prev_slide_url = os.path.join('/courses/', prev_slide.get_course(), prev_slide.get_lesson(), prev_slide.get_slide())
+		prev_slide_url = os.path.join('/app/courses/', prev_slide.get_course(), prev_slide.get_lesson(),
+									  prev_slide.get_slide())
 		bottom_nav['prev_slide_url'] = prev_slide_url
 	if slide_num == num_slides:  
 	# Last slide of lesson
 		try:
 			# Next lesson 
 			next_lesson = CLSM.objects.get(courseNumber=course_num, lessonNumber=lesson_num+1, slideNumber=1)
-			next_lesson_url = os.path.join('/courses/', next_lesson.get_course(), next_lesson.get_lesson(), next_lesson.get_slide())
+			next_lesson_url = os.path.join('/app/courses/', next_lesson.get_course(), next_lesson.get_lesson(),
+										   next_lesson.get_slide())
 			bottom_nav['next_slide_url'] = next_lesson_url
 			bottom_nav['next_slide'] = 'Next Lesson'
 		except CLSM.DoesNotExist:
 		# Next course 
 			try:
 				next_course = CLSM.objects.get(courseNumber=course_num+1, lessonNumber=1, slideNumber=1)
-				next_course_url = os.path.join('/courses/', next_course.get_course(), next_course.get_lesson(), next_course.get_slide())
+				next_course_url = os.path.join('/app/courses/', next_course.get_course(), next_course.get_lesson(),
+											   next_course.get_slide())
 				bottom_nav['next_slide_url'] = next_course_url
 				bottom_nav['next_slide'] = 'Next Course'
 			except CLSM.DoesNotExist:

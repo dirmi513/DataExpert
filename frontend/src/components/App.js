@@ -1,14 +1,16 @@
 import React from "react"
-import Blog from "./blog"
-import Courses from "./Courses" 
+import Blog from "./landing/Blog"
+import Courses from "./landing/Courses"
+import CoursesApp from "./CoursesApp"
 import Slide from "./slide/Slide"
 import Login from "./authentication/Login"
 import Logout from "./authentication/Logout"
 import Signup from "./authentication/Signup"
-import Homepage from "./Homepage"
+import Homepage from "./landing/Homepage"
 import PasswordResetConfirm from "./authentication/PasswordResetConfirm" 
 import {Switch, Route} from "react-router-dom"
 import "@babel/polyfill"
+
 
 const App = () => {
 	return (
@@ -19,16 +21,12 @@ const App = () => {
 				<Homepage />
 			</Route>
 
-			<Route exact path="/signup/">
-				<Signup />
-			</Route>
-
-			<Route exact path="/login/">
-				<Login />
-			</Route>
-
 			<Route exact path="/logout/">
 				<Logout />
+			</Route>
+
+			<Route exact path="/reset-password/:token">
+				<PasswordResetConfirm />
 			</Route>
 
 			<Route exact path="/courses/">
@@ -39,14 +37,14 @@ const App = () => {
 				<Blog />
 			</Route>
 
+			<Route exact path="/app/courses/">
+				<CoursesApp />
+			</Route>
+
 			<Route 
-				path="/courses/:course/:lesson/:slide/" 
+				path="/app/courses/:course/:lesson/:slide/"
 				component={Slide} 
 			/>
-
-			<Route exact path="/reset-password/:token">
-				<PasswordResetConfirm />
-			</Route>
 
 		</Switch> 
 		</>

@@ -1,10 +1,12 @@
 import React, {useState} from "react"
 import {Link} from "react-router-dom"
-import TopNav from "../TopNav"
-import "../../../static/frontend/style/signup.css"
+import TopBanner from "../landing/TopBanner"
+import "../../../static/frontend/style/auth/signup.css"
+import "../../../static/frontend/style/auth/auth.css"
 import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest";
 
-const Signup = () => {
+
+const Signup = (props) => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [name, setName] = useState("")
@@ -66,46 +68,43 @@ const Signup = () => {
 
 	return (
 		<>
-		<TopNav authenticated={false}/>
-		<div className="text-center">
-			<form className="form-signup" onSubmit={handleSubmit}> 
-				<h1 className="h3 mb-3 font-weight-normal">
-					Sign up 
-				</h1> 
-				<p>
-					Have an account? <Link to="/login/">Login</Link> 
-				</p>
-				<label className="sr-only"> 
-				</label>
-					<input 
-						type="text"  
-						className="form-control" 
-						placeholder="Full Name" 
-						name="name" 
-						onChange={handleChange}
-						required autoFocus/>  
-				<label className="sr-only"> 
-				</label>
-				<input 
-					type="email"  
-					className="form-control" 
-					placeholder="Email Address" 
-					name="email"
+		<form className="auth-form" id="signup-form" onSubmit={handleSubmit}>
+			<h1 className="h3 mb-3 font-weight-normal">
+				Sign up
+			</h1>
+			<p>
+				Have an account? <a href="#" onClick={(e) => {props.resetFunc(e, false)}}>Login</a>
+			</p>
+			<label className="sr-only">
+			</label>
+				<input
+					type="text"
+					className="form-control"
+					placeholder="Full Name"
+					name="name"
 					onChange={handleChange}
-					required  
-				/>
-				<label className="sr-only"> 
-				</label>
-					<input 
-						type="password"  
-						className="form-control" 
-						placeholder="Password" 
-						name="password" 
-						onChange={handleChange}
-						required />  
-				{handleIncorrectInfo()}
-			</form>
-		</div>
+					required autoFocus/>
+			<label className="sr-only">
+			</label>
+			<input
+				type="email"
+				className="form-control"
+				placeholder="Email Address"
+				name="email"
+				onChange={handleChange}
+				required
+			/>
+			<label className="sr-only">
+			</label>
+				<input
+					type="password"
+					className="form-control"
+					placeholder="Password"
+					name="password"
+					onChange={handleChange}
+					required />
+			{handleIncorrectInfo()}
+		</form>
 		</>
 	)
 }
