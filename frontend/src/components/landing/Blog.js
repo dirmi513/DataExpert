@@ -1,9 +1,9 @@
 import React from "react"
-import TopNav from "./TopNav"
+import TopBanner from "./TopBanner"
 
 const Blog = () => {
     return (
-        <TopNav />
+        <TopBanner />
     )
 }
 

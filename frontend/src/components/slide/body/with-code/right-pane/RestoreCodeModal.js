@@ -12,7 +12,7 @@ const RestoreCodeModal = (props) => {
 
 	const execRestoreCode = async () => {   
 		const arr = await restoreCode(course, lesson, slide, lessonData)   
-		if (arr != null && arr != undefined) {  
+		if (arr !== null && arr !== undefined) {
 			props.update(arr)
 			props.get(arr, slide)
 		}   

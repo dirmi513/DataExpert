@@ -3,30 +3,11 @@ import {Link} from "react-router-dom"
 import "../../static/frontend/style/navbar.css" 
 
 
-const TopNav = (props) => {
-	const authenticated = () => {
-		if(props.authenticated) {
-			return (
-				<>
-					<Link to="/courses/" className="home-pages">DATAEXPERT</Link>
-					<Link to="/logout/" className="home-pages" id="logout">Logout</Link>
-				</>
-			)
-		}else {
-			return (
-				<>
-					<Link to="/" className="home-pages">DATAEXPERT</Link>
-					<Link to="/courses/" id="courses">Courses</Link>
-					<Link to="/signup/" className="home-pages">Start Learning</Link>
-					<Link to="/blog/" className="home-pages">Blog</Link>
-				</>
-			)
-		} 
-	}
-	
+const TopNav = () => {
 	return (
 		<div className="navbar top-nav" id="top-nav">
-			{authenticated()}
+			<Link to="/app/courses/" className="home-pages">DATAEXPERT</Link>
+			<Link to="/logout/" className="home-pages" id="logout">Logout</Link>
 		</div> 
 	)
 

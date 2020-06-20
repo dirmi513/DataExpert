@@ -1,0 +1,27 @@
+.top-banner {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #02203c;
+    color: white;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 25px;
+}
+
+.top-banner-links-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.top-banner-link {
+    color: white;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 16px;
+    margin-right: 25px;
+}
+
+a.top-banner-link:hover {
+    color: white;
+}

@@ -3,14 +3,15 @@ import {useParams} from "react-router-dom"
 import SlideBody from "./body/SlideBody"
 import TopNavSlide from "./TopNavSlide"
 import BottomNavSlide from "./BottomNavSlide"
-import TopNav from "../TopNav"   
+import TopNav from "../TopNav"
+import "../../../static/frontend/style/loadingDots.css"
 
 
 const Slide = (props) => {  
 	const {course, lesson, slide} = useParams()   
 	const [lessonData, setLessonData] = useState({data: [], loaded: false})  
 	const [slideData, setSlideData] = useState({data: [], loaded:false})
-	const dataUrl = `/courses/api/${course}/${lesson}/${slide}/`   
+	const dataUrl = `/app/courses/api/${course}/${lesson}/${slide}/`
 
 	const fetchLessonData = async () => {
 		const response = await fetch(dataUrl)
@@ -41,12 +42,12 @@ const Slide = (props) => {
 		// we need to parse the array of objects to get
 		// the object that has data for the current slide  
 		arr.forEach((elem) => {
-			if (elem.slide == slide) {
+			if (elem.slide === slide) {
 				setSlideData({
 					data: {...elem},
 					loaded: true   
 				}) 
-				props.history.push(`/courses/${course}/${props.match.params.lesson}/${slide}`)
+				props.history.push(`/app/courses/${course}/${props.match.params.lesson}/${slide}`)
 			}
 		})
 	}
@@ -74,10 +75,12 @@ const Slide = (props) => {
 		{
 			slideData.loaded === false ?  
 			<>   
-				<TopNav /> 
-				<div className="loading-div">
-					<h1 id="loading">Loading...</h1> 
-				</div>  
+				<TopNav />
+				<div className="loading-dots">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
 			</> : 
 			<>        
 				<TopNavSlide 

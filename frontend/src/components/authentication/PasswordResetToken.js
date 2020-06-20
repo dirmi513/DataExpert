@@ -1,7 +1,8 @@
-import React, {useState} from "react" 
-import "../../../static/frontend/style/passwordResetToken.css"
-import TopNav from "../TopNav"
+import React, {useState} from "react"
 import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest"
+import "../../../static/frontend/style/auth/passwordResetToken.css"
+import "../../../static/frontend/style/auth/auth.css"
+
 
 const PasswordResetToken = (props) => {
 	const [email, setEmail] = useState("")
@@ -71,28 +72,25 @@ const PasswordResetToken = (props) => {
 
 	return (
 		<>
-		<TopNav authenticated={false}/>
-		<div className="text-center">
-			<form className="form-email-password-reset" onSubmit={(e) => requestPasswordResetEmail(e)}>  
-				<h1 className="h3 mb-3 font-weight-normal">
-					Enter Email Address 
-				</h1> 
-				<p>
-					Remember your password? <a href="#" onClick={(e) => props.resetFunc(e, false)}>Login</a> 
-				</p>
-				<label className="sr-only"> 
-				</label>
-				<input 
-					type="email"  
-					className="form-control signup" 
-					placeholder="Email Address" 
-					name="email"
-					onChange={handleChange}
-					required  
-				/>
-				{handleReset()}
-			</form>
-		</div>
+		<form className="auth-form" id="password-reset-form" onSubmit={(e) => requestPasswordResetEmail(e)}>
+			<h1 className="h3 mb-3 font-weight-normal">
+				Enter Email Address
+			</h1>
+			<p>
+				Remember your password? <a href="#" onClick={(e) => props.resetFunc(e, false)}>Login</a>
+			</p>
+			<label className="sr-only">
+			</label>
+			<input
+				type="email"
+				className="form-control signup"
+				placeholder="Email Address"
+				name="email"
+				onChange={handleChange}
+				required
+			/>
+			{handleReset()}
+		</form>
 		</>
 	)
 }

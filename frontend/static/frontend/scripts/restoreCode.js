@@ -3,7 +3,7 @@ import fetchPostRequest from "../scripts/fetchPostRequest"
  
 
 const restoreCode = async (course, lesson, slide, arr) => { 
-	const url = "/courses/api/restore-code/"  
+	const url = "/app/courses/api/restore-code/"
 	const postData = {
 		course: course,
 		lesson: lesson,

@@ -23,7 +23,7 @@ const lambdaOutput = async (grade, course, lesson, slide, setState) => {
     setState(false, true) 
     try {
         const code = ace.edit("ace-editor").getValue()
-        const url = "/courses/api/code-execution/"
+        const url = "/app/courses/api/code-execution/"
         const postData = {
             course: course,
             lesson: lesson,

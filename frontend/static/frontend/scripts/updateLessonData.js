@@ -1,8 +1,8 @@
 const updateLessonData = (arr, slide, code, coded) => {
-	if(coded == "T") {
+	if(coded === "T") {
 		return (
 			arr.map((elem) => {
-				if (elem.slide == slide) { 
+				if (elem.slide === slide) {
 					elem.code = code
 				}
 				return elem 
@@ -12,7 +12,7 @@ const updateLessonData = (arr, slide, code, coded) => {
 		return (
 			arr.map((elem) => {   
 				elem.slides.forEach((s, indx) => {
-					if(s.name == slide) {
+					if(s.name === slide) {
 						elem.slides[indx].completed = "T"
 					}
 				})   

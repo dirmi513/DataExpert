@@ -75,7 +75,8 @@ class GetHTMLBody(ListAPIView):
         if not data:
             error_message = 'CLS is missing from the request.'
             return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
-        return Response(data.values('htmlBody')[0], status=status.HTTP_200_OK)
+        html_body = data.values('htmlBody')[0]['htmlBody'].replace('\n', '').replace('\r', '').replace(r"\\\\", '')
+        return Response({'htmlBody': ' '.join(html_body.split())}, status=status.HTTP_200_OK)
 
 
 class CorrectAnswerToS3(GenericAPIView):

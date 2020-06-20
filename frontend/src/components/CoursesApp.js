@@ -2,11 +2,12 @@ import React, {useEffect, useState} from "react"
 import {Link} from "react-router-dom"
 import TopNav from "./TopNav" 
 import "../../static/frontend/style/courses.css"
+import "../../static/frontend/style/loadingDots.css"
 import SimpleBarReact from "simplebar-react"
 import "simplebar/src/simplebar.css"
 
 
-const Courses = () => {  
+const CoursesApp = () => {
 	const [courseData, setCourseData] = useState([])
 
 	const completedLessonCheck = (completed) => {
@@ -55,12 +56,12 @@ const Courses = () => {
 	}
 
 	const getCoursesData = async () => {
-		try {
-			const response = await fetch("/courses/api/get-courses-info/")
-			const data = await response.json()  
+		const response = await fetch("/app/courses/api/get-courses-info/")
+		const data = await response.json()
+		if(response.status === 200) {
 			setCourseData([data])
-		}catch {
-			window.location.href = "/login/"
+		}else {
+			window.location.href = "/"
 		}
 	}	
 
@@ -69,23 +70,25 @@ const Courses = () => {
 	}, []) 
 
 	return (
-		<> 
-		<TopNav authenticated={true}/>
-		<div className="courses-container">
-			<SimpleBarReact className="course-boxes">
-			{
-				courseData.length > 0 ? 
-				<div className="course-boxes"> 
-					{unpackCoursesObject(courseData[0].courses)}   
-				</div> :
-				<div className="loading-div">
-					<h1 id="loading">Loading...</h1>
-				</div>
-			}  
-			</SimpleBarReact>
-		</div>
+		<>
+		<TopNav />
+		{
+			courseData.length > 0 ?
+			<div className="courses-container">
+				<SimpleBarReact className="course-boxes">
+					<div className="course-boxes">
+						{unpackCoursesObject(courseData[0].courses)}
+					</div>
+				</SimpleBarReact>
+			</div> :
+			<div className="loading-dots">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		}
 		</>
 	)
 }
 
-export default Courses
+export default CoursesApp
