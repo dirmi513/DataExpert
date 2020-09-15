@@ -1,8 +1,10 @@
 import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest"
+import {LOGOUT_URL, HOMEPAGE_URI} from "../../GlobalVariables"
 
 const Logout = () => {
-	fetchPostRequest("/api/logout/", "")
-	window.location.href = "/"
+	console.log(LOGOUT_URL)
+	fetchPostRequest(LOGOUT_URL, "")
+	window.location.href = HOMEPAGE_URI
 	return null 
 }
 

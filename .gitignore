@@ -7,7 +7,7 @@
 *.py[co]
 .idea/
 .tox/
-__pycache__
+*__pycache__*
 courses/utils/__pycache__
 MANIFEST
 dist/

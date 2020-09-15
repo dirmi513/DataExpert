@@ -3,6 +3,11 @@ import {Link, useParams} from "react-router-dom"
 import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest"
 import "../../../static/frontend/style/auth/passwordResetConfirm.css"
 import "../../../static/frontend/style/auth/auth.css"
+import {
+	COURSES_APP_URI, GET_COURSES_APP_SLIDE_URI, HOMEPAGE_URI, GET_COURSES_APP_INFO_URI,
+	LOGOUT_URI, PASSWORD_RESET_URI, COURSES_LANDING_PAGE_URI, BLOG_LANDING_PAGE_URI, LOGIN_URI,
+	RESET_PASSWORD_CONFIRM_URI
+} from "../../GlobalVariables"
 
 
 const PasswordResetConfirm = () => {
@@ -24,7 +29,7 @@ const PasswordResetConfirm = () => {
 	const handleSubmit = async (event) => {
 		event.preventDefault()
 		setButtonLoad(true)
-		const url = "/api/reset-password/confirm/"
+		const url = RESET_PASSWORD_CONFIRM_URI
 		const data = {
 			password: password,
 			token: token

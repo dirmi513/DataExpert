@@ -1,4 +1,7 @@
 import fetchPostRequest from "../scripts/fetchPostRequest"
+import {
+    USER_CODE_EXECUTE_URI }
+    from "../../../src/GlobalVariables"
 
 const errMessage = 
     `<p class="output-text-p">
@@ -23,7 +26,7 @@ const lambdaOutput = async (grade, course, lesson, slide, setState) => {
     setState(false, true) 
     try {
         const code = ace.edit("ace-editor").getValue()
-        const url = "/app/courses/api/code-execution/"
+        const url = USER_CODE_EXECUTE_URI
         const postData = {
             course: course,
             lesson: lesson,

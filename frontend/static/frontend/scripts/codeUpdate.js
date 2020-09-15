@@ -1,12 +1,21 @@
+/**
+ *
+ *
+ *
+ */
+
 import updateLessonData from "./updateLessonData"
 import fetchPostRequest from "../scripts/fetchPostRequest"
+import {
+    PUT_COURSES_SLIDE_CODE_URI, PUT_COURSES_SLIDE_COMPLETED_URI, }
+from "../../../src/GlobalVariables"
 
 const codeUpdate = (course, lesson, slide, coded, correctAnswer, arr) => {     
     // If this is not a coded slide and the user clicks on one
     // of the top nav links or bottom nav links, set the completed
     // status of the slide to T in the db 
     if (coded !== "T" || (coded === "T" && correctAnswer === null)) {
-        const url = "/app/courses/api/slide-no-code-completed/"
+        const url = PUT_COURSES_SLIDE_COMPLETED_URI
         const data = {
             course: course,
             lesson: lesson,
@@ -18,7 +27,7 @@ const codeUpdate = (course, lesson, slide, coded, correctAnswer, arr) => {
     // in the db to whatever is in the text editor at the time they leave
     // the slide 
     }else {
-        const url = "/app/courses/api/code-update/"
+        const url = PUT_COURSES_SLIDE_CODE_URI
         const code = ace.edit("ace-editor").getValue()    
         const data = {
             course: course,

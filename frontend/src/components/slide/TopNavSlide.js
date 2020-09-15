@@ -2,6 +2,10 @@ import React, {useState, useEffect} from "react"
 import {Link} from "react-router-dom"
 import codeUpdate from "../../../static/frontend/scripts/codeUpdate" 
 import "../../../static/frontend/style/navbar.css"
+import {
+	COURSES_APP_URI, GET_COURSES_APP_SLIDE_URI, HOMEPAGE_URI,
+	LOGOUT_URI, PASSWORD_RESET_URI, COURSES_LANDING_PAGE_URI, BLOG_LANDING_PAGE_URI
+} from "../../GlobalVariables"
 
 const TopNavSlide = (props) => {  
 	const [slideDropdown, setSlideDropdown] = useState([])
@@ -46,14 +50,14 @@ const TopNavSlide = (props) => {
 
 	return (    
 		<div className="navbar top-nav" id="top-nav">
-			<Link to="/app/courses/" id="courses">Courses</Link>
+			<Link to={COURSES_APP_URI} id="courses">Courses</Link>
 				<div className="dropdown">
 					<button className="dropDownButton">Lesson : {props.lesson} </button>
 					<div className="dropdownContent" id="dropdownContent">
 						{slideDropdown}
 					</div>
 				</div>
-			<Link to="/logout/" id="logout">Logout</Link> 
+			<Link to={LOGOUT_URI} id="logout">Logout</Link>
 		</div>    
 	) 
 

@@ -5,13 +5,17 @@ import TopNavSlide from "./TopNavSlide"
 import BottomNavSlide from "./BottomNavSlide"
 import TopNav from "../TopNav"
 import "../../../static/frontend/style/loadingDots.css"
+import {
+	COURSES_APP_URI, GET_COURSES_APP_SLIDE_URI, HOMEPAGE_URI,
+	LOGOUT_URI, PASSWORD_RESET_URI, COURSES_LANDING_PAGE_URI, BLOG_LANDING_PAGE_URI
+} from "../../GlobalVariables"
 
 
 const Slide = (props) => {  
 	const {course, lesson, slide} = useParams()   
 	const [lessonData, setLessonData] = useState({data: [], loaded: false})  
 	const [slideData, setSlideData] = useState({data: [], loaded:false})
-	const dataUrl = `/app/courses/api/${course}/${lesson}/${slide}/`
+	const dataUrl = `${COURSES_APP_URI}/${course}/${lesson}/${slide}`
 
 	const fetchLessonData = async () => {
 		const response = await fetch(dataUrl)
@@ -47,7 +51,7 @@ const Slide = (props) => {
 					data: {...elem},
 					loaded: true   
 				}) 
-				props.history.push(`/app/courses/${course}/${props.match.params.lesson}/${slide}`)
+				props.history.push(`/${course}/${props.match.params.lesson}/${slide}`)
 			}
 		})
 	}

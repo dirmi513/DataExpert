@@ -5,7 +5,7 @@ import "../../static/frontend/style/courses.css"
 import "../../static/frontend/style/loadingDots.css"
 import SimpleBarReact from "simplebar-react"
 import "simplebar/src/simplebar.css"
-
+import {GET_COURSES_APP_INFO_URI, HOMEPAGE_URI} from "../GlobalVariables"
 
 const CoursesApp = () => {
 	const [courseData, setCourseData] = useState([])
@@ -56,12 +56,12 @@ const CoursesApp = () => {
 	}
 
 	const getCoursesData = async () => {
-		const response = await fetch("/app/courses/api/get-courses-info/")
+		const response = await fetch(GET_COURSES_APP_INFO_URI)
 		const data = await response.json()
 		if(response.status === 200) {
 			setCourseData([data])
 		}else {
-			window.location.href = "/"
+			window.location.href = HOMEPAGE_URI
 		}
 	}	
 

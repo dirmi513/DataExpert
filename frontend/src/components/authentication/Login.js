@@ -4,6 +4,10 @@ import Signup from "./Signup"
 import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest"
 import "../../../static/frontend/style/auth/login.css"
 import "../../../static/frontend/style/auth/auth.css"
+import {
+	COURSES_APP_URI, GET_COURSES_APP_SLIDE_URI, HOMEPAGE_URI, GET_COURSES_APP_INFO_URI,
+	LOGOUT_URI, PASSWORD_RESET_URI, COURSES_LANDING_PAGE_URI, BLOG_LANDING_PAGE_URI, LOGIN_URI
+} from "../../GlobalVariables"
 
 
 const Login = (props) => {
@@ -16,9 +20,9 @@ const Login = (props) => {
 	useEffect(() => {
 		// Check if the user is already logged in
 		const checkLoggedIn = async () => {
-			const response = await fetch("/app/courses/api/get-courses-info/")
+			const response = await fetch(GET_COURSES_APP_INFO_URI)
 			if (response.status === 200) {
-				window.location.href = "/app/courses/"
+				window.location.href = COURSES_APP_URI
 			}
 		}
 		checkLoggedIn()
@@ -36,14 +40,14 @@ const Login = (props) => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault()
-		const url = "/api/login/"
+		const url = LOGIN_URI
 		const data = {
 			email: email,
 			password: password
 		}
 		const response = await fetchPostRequest(url, data)
 		if(response.status === 200) {
-			window.location.href = "/app/courses/"
+			window.location.href = COURSES_APP_URI
 		}else if(response.status === 401) {
 			setIncorrectInfo(true)
 		}
@@ -85,7 +89,7 @@ const Login = (props) => {
 
 	return (
 		<>
-		<div className="auth-container" onClick={() => props.updateLogIn()}></div>
+		<div className="auth-container" onClick={() => props.updateLogIn()}/>
 		<div className="auth-form-animate">
 		{resetPassword ?
 		<PasswordResetToken resetFunc={handleResetPasswordClick} /> :
