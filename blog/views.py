@@ -35,9 +35,9 @@ class UpdateBlogPostContent(GenericAPIView):
             serializer = self.serializer_class(blog_post_instance, data=request.data)
             serializer.is_valid(raise_exception=True) 
             serializer.save()
-            return Response('Success', status=status.HTTP_200_OK)
+            return Response('Successfully updated the blog post\'s content', status=status.HTTP_200_OK)
         except Exception as e:
-            return Response(f'There was an error: {e}', status=status.HTTP_400_BAD_REQUEST)
+            return Response(f'There was an error updating the blog post: {str(e)}', status=status.HTTP_400_BAD_REQUEST)
 
 
 class GetBlogPostContent(ListAPIView):

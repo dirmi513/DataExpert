@@ -40,28 +40,15 @@ def save_clsm_data(request, serializer_class, return_data=False):
     return data, _cls if return_data else None
 
 
-class UpdateHTMLBody(GenericAPIView):
-    """Update the HTML body for the specified slide.
-    """
-    permission_classes = (IsAdminUser, )
-    serializer_class = UpdateHTMLBodySerializer
+class HTMLBody(ListAPIView):
+    """Either returns or updates a certain slide's htmlBody.
 
-    def post(self, request):
-        try:
-            save_clsm_data(request, self.serializer_class)
-            return Response('Success', status=status.HTTP_200_OK)
-        except Exception as e:
-            return Response(f'There was an error: {e}', status=status.HTTP_400_BAD_REQUEST)
-
-
-class GetHTMLBody(ListAPIView):
-    """Return's a certain slide's HTML body.
-
-    You must specify the cls as a parameter when hitting the REST endpoint:
+    For the GET request, you must specify the cls as a
+    parameter when hitting the REST endpoint:
         e.g. http://localhost:8000/courses/api/get-html-body?cls=111
     """
     permission_classes = (IsAdminUser, )
-    serializer_class = CourseLessonSlideMasterSerializer
+    # serializer_class
 
     def get_queryset(self):
         _cls = self.request.query_params.get('cls')
@@ -77,6 +64,20 @@ class GetHTMLBody(ListAPIView):
             return Response({'error': error_message}, status=status.HTTP_400_BAD_REQUEST)
         html_body = data.values('htmlBody')[0]['htmlBody'].replace('\n', '').replace('\r', '').replace(r"\\\\", '')
         return Response({'htmlBody': ' '.join(html_body.split())}, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        try:
+            save_clsm_data(request, self.serializer_class)
+            return Response('Success', status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(f'There was an error: {e}', status=status.HTTP_400_BAD_REQUEST)
+
+    def get_serializer_class(self):
+        http_method = self.request.method
+        if http_method == "GET":
+            return CourseLessonSlideMasterSerializer
+        elif http_method == "PUT":
+            return UpdateHTMLBodySerializer
 
 
 class CorrectAnswerToS3(GenericAPIView):
@@ -147,7 +148,7 @@ def course_info(request):
                 else:
                     min_slide = num_completed + 1
             slide = CLSM.objects.get(course=course, lesson=lesson, slideNumber=min_slide).get_slide()
-            url = os.path.join(course, lesson, slide)  
+            url = os.path.join("/", course, lesson, slide)
             lesson_list.append({
                 'lesson': lesson, 
                 'url': url, 
@@ -161,7 +162,7 @@ def course_info(request):
 
 @api_view(['GET']) 
 @permission_classes((IsAuthenticated, ))
-def lesson_data(request, course, lesson, slide):
+def get_lesson_data(request, course, lesson, slide):
     """GETs all of the data for a single lesson.
 
     Args:
@@ -179,8 +180,6 @@ def lesson_data(request, course, lesson, slide):
     lesson_data = []
     for s in slides:
         clsm_instance = CLSM.objects.get(course=course, lesson=lesson, slide=s)
-        course_num = clsm_instance.get_course_num()
-        lesson_num = clsm_instance.get_lesson_num()
         slide_num = clsm_instance.get_slide_num()
         _cls = clsm_instance.get_cls() 
         default_code = clsm_instance.get_code()
@@ -198,15 +197,15 @@ def lesson_data(request, course, lesson, slide):
         bottom_nav = slide_bottom_nav(slide_num, num_slides, slide_instances, str(_cls))
 
         data = {
-            'correct_answer': correct_ans,
-            'slide': s, 
-            'code': code,
-            'coded': coded,
-            'slides' : slide_dropdown,
-            'course': course,
-            'lesson' : lesson,
-            'bottomNav': bottom_nav,
-            'html': html_body 
+            "correct_answer": correct_ans,
+            "slide": s,
+            "code": code,
+            "coded": coded,
+            "slides": slide_dropdown,
+            "course": course,
+            "lesson": lesson,
+            "bottomNav": bottom_nav,
+            "html": html_body
         } 
         
         lesson_data.append(data)

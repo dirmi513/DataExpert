@@ -42,54 +42,54 @@ def slide_top_nav_dropdown(user_id, course, lesson):
             'id': slide_id,
             'number': dropdown_number,
             'name': slide, 
-            'url': os.path.join('/courses/', course, lesson, slide),
+            'url': os.path.join(course, lesson, slide),
             'completed': slide_completed
         } 
         slide_dropdown.append(dropdown_dic)
-    slide_dropdown.sort(key = lambda x: x['id']) 
+    slide_dropdown.sort(key=lambda x: x['id'])
     return slide_dropdown, num_slides, slide_instances
 
 
 def slide_bottom_nav(slide_num, num_slides, slide_instances, _cls):
-	"""
-	What to display in the bottom navbar
-	of each slide page
-	"""
-	course_num, lesson_num = int(_cls[0]), int(_cls[1])
-	bottom_nav = {
-		'middle_element': str(slide_num) + ' / ' + str(num_slides),
-		'prev_slide': 'Previous Slide',
-		'prev_slide_url': '#',
-		'next_slide': 'Next Slide', 
-		'next_slide_url': '#'
-	}  
-	if slide_num == 1 or (1 < slide_num < num_slides):
-		next_slide = slide_instances.filter(slideNumber=slide_num+1)[0]
-		next_slide_url = os.path.join('/app/courses/', next_slide.get_course(), next_slide.get_lesson(),
-									  next_slide.get_slide())
-		bottom_nav['next_slide_url'] = next_slide_url 
-	if slide_num > 1: 
-		prev_slide = slide_instances.filter(slideNumber=slide_num-1)[0]
-		prev_slide_url = os.path.join('/app/courses/', prev_slide.get_course(), prev_slide.get_lesson(),
-									  prev_slide.get_slide())
-		bottom_nav['prev_slide_url'] = prev_slide_url
-	if slide_num == num_slides:  
-	# Last slide of lesson
-		try:
-			# Next lesson 
-			next_lesson = CLSM.objects.get(courseNumber=course_num, lessonNumber=lesson_num+1, slideNumber=1)
-			next_lesson_url = os.path.join('/app/courses/', next_lesson.get_course(), next_lesson.get_lesson(),
-										   next_lesson.get_slide())
-			bottom_nav['next_slide_url'] = next_lesson_url
-			bottom_nav['next_slide'] = 'Next Lesson'
-		except CLSM.DoesNotExist:
-		# Next course 
-			try:
-				next_course = CLSM.objects.get(courseNumber=course_num+1, lessonNumber=1, slideNumber=1)
-				next_course_url = os.path.join('/app/courses/', next_course.get_course(), next_course.get_lesson(),
-											   next_course.get_slide())
-				bottom_nav['next_slide_url'] = next_course_url
-				bottom_nav['next_slide'] = 'Next Course'
-			except CLSM.DoesNotExist:
-				bottom_nav['next_slide'] = 'Path Complete'
-	return bottom_nav
+    """
+    What to display in the bottom navbar
+    of each slide page
+    """
+    course_num, lesson_num = int(_cls[0]), int(_cls[1])
+    bottom_nav = {
+        'middle_element': str(slide_num) + ' / ' + str(num_slides),
+        'prev_slide': 'Previous Slide',
+        'prev_slide_url': '#',
+        'next_slide': 'Next Slide',
+        'next_slide_url': '#'
+    }
+    if slide_num == 1 or (1 < slide_num < num_slides):
+        next_slide = slide_instances.filter(slideNumber=slide_num+1)[0]
+        next_slide_url = os.path.join("/", next_slide.get_course(), next_slide.get_lesson(),
+                                      next_slide.get_slide())
+        bottom_nav['next_slide_url'] = next_slide_url
+    if slide_num > 1:
+        prev_slide = slide_instances.filter(slideNumber=slide_num-1)[0]
+        prev_slide_url = os.path.join("/", prev_slide.get_course(), prev_slide.get_lesson(),
+                                      prev_slide.get_slide())
+        bottom_nav['prev_slide_url'] = prev_slide_url
+    if slide_num == num_slides:
+    # Last slide of lesson
+        try:
+            # Next lesson
+            next_lesson = CLSM.objects.get(courseNumber=course_num, lessonNumber=lesson_num+1, slideNumber=1)
+            next_lesson_url = os.path.join("/", next_lesson.get_course(), next_lesson.get_lesson(),
+                                           next_lesson.get_slide())
+            bottom_nav['next_slide_url'] = next_lesson_url
+            bottom_nav['next_slide'] = 'Next Lesson'
+        except CLSM.DoesNotExist:
+        # Next course
+            try:
+                next_course = CLSM.objects.get(courseNumber=course_num+1, lessonNumber=1, slideNumber=1)
+                next_course_url = os.path.join("/", next_course.get_course(), next_course.get_lesson(),
+                                               next_course.get_slide())
+                bottom_nav['next_slide_url'] = next_course_url
+                bottom_nav['next_slide'] = 'Next Course'
+            except CLSM.DoesNotExist:
+                bottom_nav['next_slide'] = 'Path Complete'
+    return bottom_nav

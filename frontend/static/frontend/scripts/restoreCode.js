@@ -1,9 +1,12 @@
 import updateLessonData from "./updateLessonData"
 import fetchPostRequest from "../scripts/fetchPostRequest"
+import {
+	USER_CODE_RESTORE_URI }
+	from "../../../src/GlobalVariables"
  
 
 const restoreCode = async (course, lesson, slide, arr) => { 
-	const url = "/app/courses/api/restore-code/"
+	const url = USER_CODE_RESTORE_URI
 	const postData = {
 		course: course,
 		lesson: lesson,

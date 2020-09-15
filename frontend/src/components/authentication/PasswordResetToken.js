@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest"
 import "../../../static/frontend/style/auth/passwordResetToken.css"
 import "../../../static/frontend/style/auth/auth.css"
+import {RESET_PASSWORD_EMAIL_URI} from "../../GlobalVariables"
 
 
 const PasswordResetToken = (props) => {
@@ -21,7 +22,7 @@ const PasswordResetToken = (props) => {
 	const requestPasswordResetEmail = async (event) => {
 		event.preventDefault()
 		setButtonLoad(true)
-		const url = "/api/reset-password/"
+		const url = RESET_PASSWORD_EMAIL_URI
 		const data = {
 			email: email
 		}
