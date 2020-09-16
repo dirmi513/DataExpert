@@ -1,23 +1,23 @@
 import React from "react"
-import Blog from "./landing/Blog"
-import Courses from "./landing/Courses"
-import CoursesApp from "./CoursesApp"
-import Slide from "./slide/Slide"
-import Logout from "./authentication/Logout"
-import Homepage from "./landing/Homepage"
-import PasswordResetConfirm from "./authentication/PasswordResetConfirm"
+import Blog from "./components/landing/Blog"
+import Courses from "./components/landing/Courses"
+import CoursesApp from "./components/app/CoursesApp"
+import Slide from "./components/app/slide/Slide"
+import Logout from "./components/authentication/Logout"
+import Homepage from "./components/landing/Homepage"
+import PasswordResetConfirm from "./components/authentication/PasswordResetConfirm"
 import {
 	COURSES_APP_URI, GET_COURSES_APP_SLIDE_URI, HOMEPAGE_URI,
 	LOGOUT_URI, PASSWORD_RESET_URI, COURSES_LANDING_PAGE_URI, BLOG_LANDING_PAGE_URI
-} from "../GlobalVariables"
+} from "./GlobalVariables"
 import {Switch, Route} from "react-router-dom"
 import "@babel/polyfill"
 
 
 const App = () => {
 	return (
-		<> 
-		<Switch> 
+		<>
+		<Switch>
 
 			<Route exact path={HOMEPAGE_URI}>
 				<Homepage />
@@ -43,12 +43,12 @@ const App = () => {
 				<CoursesApp />
 			</Route>
 
-			<Route 
+			<Route
 				path={GET_COURSES_APP_SLIDE_URI}
-				component={Slide} 
+				component={Slide}
 			/>
 
-		</Switch> 
+		</Switch>
 		</>
 	)
 }

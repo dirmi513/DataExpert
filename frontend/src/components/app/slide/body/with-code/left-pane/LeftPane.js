@@ -2,31 +2,31 @@ import React, {useState, useEffect, useRef} from "react"
 import LeftPaneHintButton from "./LeftPaneHintButton"
 import LeftPaneBody from "./LeftPaneBody"
 import AceEditor from "react-ace"
-import "../../../../../../static/frontend/ace/src-noconflict/theme-crimson_editor"
+import "../../../../../../../static/frontend/ace/src-noconflict/theme-crimson_editor"
 
-const LeftPane = (props) => { 
+const LeftPane = (props) => {
 	const [showHint, setShowHint] = useState(false)
-	const [showCorrectAnswer, setShowCorrectAnswer] = useState(false)  
+	const [showCorrectAnswer, setShowCorrectAnswer] = useState(false)
 	const bottomOfLeftPaneRef = useRef(null)
 
 	const scrollToBottom = () => {
-		bottomOfLeftPaneRef.current.scrollIntoView({ 
+		bottomOfLeftPaneRef.current.scrollIntoView({
 			behavior: "smooth"
 		 })
-	}  
+	}
 
 	const setHintAnswer = (val, bool) => {
 		if(val == "hint") {
-			setShowHint(bool) 
+			setShowHint(bool)
 		}else if(val == "answer") {
 			setShowCorrectAnswer(bool)
 		}
-	} 
+	}
 
 	useEffect(() => {
 		setShowHint(false)
-		setShowCorrectAnswer(false)  
-	}, [props.slide])  
+		setShowCorrectAnswer(false)
+	}, [props.slide])
 
 	useEffect(() => {
 		if(showCorrectAnswer) {
@@ -36,67 +36,67 @@ const LeftPane = (props) => {
 		}else if(showHint) {
 			scrollToBottom()
 		}
-	}, [showCorrectAnswer, showHint]) 
+	}, [showCorrectAnswer, showHint])
 
 	const belowLeftPane = () => {
 		let divBody = <></>
-		if(showHint) { 
-			divBody = 
+		if(showHint) {
+			divBody =
 				<>
 					<hr id="hr-hint-answer"/>
 					<h4 id="head-hint-answer">Hint</h4>
-					<p id="p-hint">PROPS.HINT</p> 
+					<p id="p-hint">PROPS.HINT</p>
 				</>
 		}else if(showCorrectAnswer) {
 			const maxLines = props.correctAnswer.split("\n").length
-			divBody = 
+			divBody =
 				<>
 					<hr id="hr-hint-answer"/>
 					<h4 id="head-hint-answer">Correct Answer</h4>
-					<AceEditor   
+					<AceEditor
 						className="ace-editor-correct-answer"
 						name="ace-editor-2"
 						mode="python"
-						theme="crimson_editor"   
+						theme="crimson_editor"
 						fontSize={14}
 						wrapEnabled={true}
 						showPrintMargin={false}
-						showGutter={true} 
+						showGutter={true}
 						value={props.correctAnswer}
-						readOnly={true}  
+						readOnly={true}
 						minLines={1}
-						maxLines={maxLines}    
+						maxLines={maxLines}
 						setOptions={{
 							highlightGutterLine: false,
 							highlightSelectedWord: false,
 							highlightActiveLine: false
 						}}
-					/>   
+					/>
 				</>
 		}else {
 			return <></>
 		}
 		return (
-			<div 
-				className="left-pane-hint-answer" 
+			<div
+				className="left-pane-hint-answer"
 				ref={bottomOfLeftPaneRef}
 			>
 				{divBody}
-			</div>  
-		) 
+			</div>
+		)
 	}
- 
-	return ( 
-		<>   
-			<LeftPaneBody html={props.html} />     
+
+	return (
+		<>
+			<LeftPaneBody html={props.html} />
 			{
 				props.correctAnswer === null ?
 				null :
 				<>
 					<LeftPaneHintButton setHintOrAnswer={setHintAnswer} />
-					{belowLeftPane()}  
-				</>   
-			} 
+					{belowLeftPane()}
+				</>
+			}
 		</>
 	)
 }
