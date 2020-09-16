@@ -1,7 +1,7 @@
-import React, {useEffect} from "react"    
-import "../../../../../../static/frontend/style/slide/submitAnswerResult.css"
+import React, {useEffect} from "react"
+import "../../../../../../../static/frontend/style/slide/submitAnswerResult.css"
 
-const SubmitAnswerWrong = (props) => {    
+const SubmitAnswerWrong = (props) => {
 
 	const dissolveSubmitAnswerPopup = () => {
 		document.querySelector(".submit-answer-result-wrong").style.opacity = "0"
@@ -17,13 +17,13 @@ const SubmitAnswerWrong = (props) => {
 	}, [props.slide])
 
 	return (
-		<div className="submit-answer-result-wrong"> 
+		<div className="submit-answer-result-wrong">
 			<p className="submit-answer-result-wrong-p">
 				You answered incorrectly! Please try again.
-			</p>  
-			<button 
-				type="button" 
-				className="close submit-answer-result-close" 
+			</p>
+			<button
+				type="button"
+				className="close submit-answer-result-close"
 				aria-label="Close"
 				onClick={() => closeOnClick()}
 			>
@@ -35,4 +35,4 @@ const SubmitAnswerWrong = (props) => {
 	)
 }
 
-export default SubmitAnswerWrong 
+export default SubmitAnswerWrong

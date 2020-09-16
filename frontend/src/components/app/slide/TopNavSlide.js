@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from "react" 
+import React, {useState, useEffect} from "react"
 import {Link} from "react-router-dom"
-import codeUpdate from "../../../static/frontend/scripts/codeUpdate" 
-import "../../../static/frontend/style/navbar.css"
+import codeUpdate from "../../../../static/frontend/scripts/codeUpdate"
+import "../../../../static/frontend/style/navbar.css"
 import {
-	COURSES_APP_URI, GET_COURSES_APP_SLIDE_URI, HOMEPAGE_URI,
-	LOGOUT_URI, PASSWORD_RESET_URI, COURSES_LANDING_PAGE_URI, BLOG_LANDING_PAGE_URI
-} from "../../GlobalVariables"
+	COURSES_APP_URI, LOGOUT_URI,
+} from "../../../GlobalVariables"
 
-const TopNavSlide = (props) => {  
+const TopNavSlide = (props) => {
 	const [slideDropdown, setSlideDropdown] = useState([])
 
 	useEffect(() => {
@@ -21,34 +20,34 @@ const TopNavSlide = (props) => {
 	}, [props.slide])
 
 	const onClick = (slide) => {
-		const arr = codeUpdate(props.course, props.lesson, props.slide, 
-			props.coded, props.correctAnswer, props.lessonData)  
+		const arr = codeUpdate(props.course, props.lesson, props.slide,
+			props.coded, props.correctAnswer, props.lessonData)
 		props.update(arr)
-		props.get(arr, slide)  
-	} 
+		props.get(arr, slide)
+	}
 
-	const generateSlideDropdownContent = () => { 
+	const generateSlideDropdownContent = () => {
 		return (
 			props.slides.map((slide) => {
 				return (
-					<a 
-						href="#" 
-						key={slide.id} 
+					<a
+						href="#"
+						key={slide.id}
 						onClick={() => onClick(slide.name)}
-					> 
-					{slide.number} {slide.name} 
+					>
+					{slide.number} {slide.name}
 						{slide.completed === "T" ?
-						<i className="check material-icons"> 
-							check_circle_outline 
+						<i className="check material-icons">
+							check_circle_outline
 						</i> :
 						null}
 					</a>
 				)
-			})  
+			})
 		)
 	}
 
-	return (    
+	return (
 		<div className="navbar top-nav" id="top-nav">
 			<Link to={COURSES_APP_URI} id="courses">Courses</Link>
 				<div className="dropdown">
@@ -58,8 +57,8 @@ const TopNavSlide = (props) => {
 					</div>
 				</div>
 			<Link to={LOGOUT_URI} id="logout">Logout</Link>
-		</div>    
-	) 
+		</div>
+	)
 
 }
 

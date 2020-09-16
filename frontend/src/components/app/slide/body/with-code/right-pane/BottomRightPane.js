@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react"
-import RestoreCodeModal from "./RestoreCodeModal" 
-import lambdaOutput from "../../../../../../static/frontend/scripts/lambdaOutput"
-import codeOutput from "../../../../../../static/frontend/scripts/codeOutput"
+import RestoreCodeModal from "./RestoreCodeModal"
+import lambdaOutput from "../../../../../../../static/frontend/scripts/lambdaOutput"
+import codeOutput from "../../../../../../../static/frontend/scripts/codeOutput"
 import SimpleBarReact from "simplebar-react"
-import "../../../../../../static/frontend/style/slide/bottomRightPane.css"
- 
+import "../../../../../../../static/frontend/style/slide/bottomRightPane.css"
 
 
-const BottomRightPane = (props) => {  
+
+const BottomRightPane = (props) => {
 	const [modalShow, setModalShow] = useState(false)
 	const [executing, setExecuting] = useState(false)
-	const [submitting, setSubmitting] = useState(false)   
+	const [submitting, setSubmitting] = useState(false)
 
-	useEffect(() => { 
+	useEffect(() => {
 		codeOutput()
 	}, [])
 
 	useEffect(() => {
 		document.getElementById("output-txt").innerHTML = ""
-	}, [props.slide])  
+	}, [props.slide])
 
 	const executeCode = (event, submit) => {
 		event.preventDefault()
@@ -33,63 +33,63 @@ const BottomRightPane = (props) => {
 		submit ?
 		setSubmitting(bool) :
 		setExecuting(bool)
-	}   
-	
-	return ( 
+	}
+
+	return (
 		<div className="bottomRightPane">
-			<div className="buttons-holder">  
-				<button 
-					type="submit"  
-					id="execute-code" 
-					className="button lambda"  
+			<div className="buttons-holder">
+				<button
+					type="submit"
+					id="execute-code"
+					className="button lambda"
 					onClick={(e) => executeCode(e, false)}
 				>
 					{
 						executing ?
 						<>
-						<span 
-							className="spinner-border spinner-border-sm" 
-							role="status" 
+						<span
+							className="spinner-border spinner-border-sm"
+							role="status"
 							aria-hidden="true"
-						> 
-						</span> 
+						>
+						</span>
 						<span>Executing...</span>
 						</>
 						:
 						<span>Execute Code</span>
 					}
-				</button>   
+				</button>
 
-				<button 
-					type="submit"  
-					id="submit-answer" 
-					className="button lambda"  
+				<button
+					type="submit"
+					id="submit-answer"
+					className="button lambda"
 					onClick={(e) => executeCode(e, true)}
 				>
 					{
 						submitting ?
 						<>
-						<span 
-							className="spinner-border spinner-border-sm" 
-							role="status" 
+						<span
+							className="spinner-border spinner-border-sm"
+							role="status"
 							aria-hidden="true"
-						> 
-						</span> 
+						>
+						</span>
 						<span>Grading...</span>
 						</>
 						:
 						<span>Submit Answer</span>
 					}
-				</button>    
+				</button>
 
-				<button 
-					type="button" 
-					className="restore material-icons" 
+				<button
+					type="button"
+					className="restore material-icons"
 					onClick={() => setModalShow(true)}
 				>
-					restore 
-				</button> 
-				<RestoreCodeModal 
+					restore
+				</button>
+				<RestoreCodeModal
 					show={modalShow}
 					onHide={() => setModalShow(false)}
 					course={props.course}
@@ -100,12 +100,12 @@ const BottomRightPane = (props) => {
 					update={props.update}
 				/>
 
-			</div> 
+			</div>
 
-			<SimpleBarReact className="code-output"> 
-				<div id="output-txt"></div>  
+			<SimpleBarReact className="code-output">
+				<div id="output-txt"></div>
 			</SimpleBarReact>
-        </div> 
+        </div>
 	)
 }
 
