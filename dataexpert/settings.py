@@ -34,8 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'frontend.apps.FrontendConfig',
-    'courses.apps.CoursesConfig',
-    'blog.apps.BlogConfig',
+    'courses.apps.CoursesConfig', 
 
     'rest_framework',
     'django_rest_passwordreset',
