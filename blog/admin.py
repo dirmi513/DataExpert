@@ -3,4 +3,3 @@ from django.contrib import admin
 
 # This is where you can register your models so that they show up on your admin page
 #admin.site.register(Post)
-
