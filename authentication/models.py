@@ -9,8 +9,8 @@ class CustomUser(AbstractUser):
 	name = models.CharField(max_length=150, default=None, blank=False, null=False) 
 	location = models.TextField(default=None, blank=True, null=True)
 
-	USERNAME_FIELD = "email"
-	REQUIRED_FIELDS = ["name"]
+	USERNAME_FIELD = 'email'
+	REQUIRED_FIELDS = ['name']
 
 	objects = CustomUserManager()  
 

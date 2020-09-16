@@ -23,12 +23,12 @@ class LoginView(APIView):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return Response('User logged in successfully.', status=status.HTTP_200_OK)
+                return Response("User logged in successfully.", status=status.HTTP_200_OK)
             else:
-                return Response('Your account is no longer active. Please create a new account.',
+                return Response("Your account is no longer active. Please create a new account.",
                                 status=status.HTTP_403_FORBIDDEN)
         else:
-            return Response('Incorrect email and password combination. Please try again.',
+            return Response("Incorrect email and password combination. Please try again.",
                             status=status.HTTP_401_UNAUTHORIZED)
 
 
@@ -46,9 +46,9 @@ class CustomUserCreate(APIView):
     """
     permission_classes = (permissions.AllowAny,)
 
-    def post(self, request, format="json"):
+    def post(self, request, format='json'):
         if not request.data:
-            return Response('Please enter a name, email address, and password.', status=status.HTTP_400_BAD_REQUEST)
+            return Response("Please enter a name, email address, and password.", status=status.HTTP_400_BAD_REQUEST)
         data = {
             'email': request.data.pop('email', None),
             'name': request.data.pop('name', None),
@@ -56,11 +56,11 @@ class CustomUserCreate(APIView):
         }
         emails = [email['email'].lower() for email in CustomUser.objects.values('email').distinct()]
         if data['email'].lower() in emails:
-            return Response('This email address is already taken.', status=status.HTTP_400_BAD_REQUEST)
+            return Response("This email address is already taken.", status=status.HTTP_400_BAD_REQUEST)
         if data['name'] is None or data['name'].strip() == '':
-            return Response('Please enter your name.', status=status.HTTP_400_BAD_REQUEST)
+            return Response("Please enter your name.", status=status.HTTP_400_BAD_REQUEST)
         if data['password'] is None or data['password'].strip() == '':
-            return Response('Please enter a valid password.', status=status.HTTP_400_BAD_REQUEST)
+            return Response("Please enter a valid password.", status=status.HTTP_400_BAD_REQUEST)
         serializer = CustomUserSerializer(data=data)
         if serializer.is_valid():
             user = serializer.save()
@@ -79,14 +79,14 @@ def password_reset_token_created(sender, reset_password_token, *args, **kwargs):
             reset_password_token: Token Model Object
     """
     reset_password_key = reset_password_token.key
-    email_subject = "Password Reset for DataExpert"
     user_email = reset_password_token.user.email
     user_reset_pwd_url = f"http://localhost:8000/reset-password/{reset_password_key}"
-    email_message = f"Please reset your password: {user_reset_pwd_url}"
+    email_message = f"Please click the following link to reset your password: {user_reset_pwd_url}"
+    email_subject = f"Password Reset for {user_email}"
     send_mail(
-        email_subject,
-        email_message,
-        "support@dataexpert.io",
-        [user_email],
+        subject=email_subject,
+        message=email_message,
+        from_email="support@dataexpert.io",
+        recipient_list=[user_email],
         fail_silently=False
     )
