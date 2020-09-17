@@ -9,7 +9,8 @@ from django_rest_passwordreset.signals import reset_password_token_created
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 
-GUEST_USER_EMAIL = "guestuser@dataexpert.io"
+GUEST_USER_EMAIL = 'guestuser@dataexpert.io'
+DATAEXPERT_URL = 'http://localhost:8000/'
 
 
 class LoginView(APIView):
@@ -86,7 +87,7 @@ def password_reset_token_created(sender, reset_password_token, *args, **kwargs):
     """
     reset_password_key = reset_password_token.key
     user_email = reset_password_token.user.email
-    user_reset_pwd_url = f"http://localhost:8000/reset-password/{reset_password_key}"
+    user_reset_pwd_url = f"{DATAEXPERT_URL}reset-password/{reset_password_key}"
     email_message = f"Please click the following link to reset your password: {user_reset_pwd_url}"
     email_subject = f"Password Reset for {user_email}"
     send_mail(
@@ -96,3 +97,4 @@ def password_reset_token_created(sender, reset_password_token, *args, **kwargs):
         recipient_list=[user_email],
         fail_silently=False
     )
+
