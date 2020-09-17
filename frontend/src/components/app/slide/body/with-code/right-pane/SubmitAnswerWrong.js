@@ -1,5 +1,5 @@
 import React, {useEffect} from "react"
-import "../../../../../../../static/frontend/style/slide/submitAnswerResult.css"
+import "../../../../../../../static/frontend/style/app/slide/submitAnswerResult.css"
 
 const SubmitAnswerWrong = (props) => {
 

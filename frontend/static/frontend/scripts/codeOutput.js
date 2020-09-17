@@ -1,3 +1,10 @@
+/**
+ *
+ * Handler for toggling the view of the contents
+ * of the variables defined in the user's code.
+ *
+ */
+
 const codeOutput = () => {
 	let output = document.getElementById('output-txt')
 	output.addEventListener("DOMNodeInserted", (e) => {
@@ -12,7 +19,7 @@ const codeOutput = () => {
 						}
 					})
 				}
-		} catch {}  
+		} catch {}
 	}, false)
 }
 

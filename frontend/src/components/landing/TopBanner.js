@@ -36,7 +36,6 @@ const TopBanner = () => {
         <div className="top-banner">
             <div className="top-banner-links-container">
                 <Link to="/" className="top-banner-link">Why DataExpert?</Link>
-                <Link to="/courses/" className="top-banner-link">Courses</Link>
                 <a
                     href="#"
                     className="top-banner-link"
@@ -44,7 +43,6 @@ const TopBanner = () => {
                 >
                     Start Learning
                 </a>
-                <Link to="/blog/" className="top-banner-link">Blog</Link>
             </div>
         </div>
         {

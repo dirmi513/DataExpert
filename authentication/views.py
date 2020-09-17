@@ -3,10 +3,13 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import CustomUserSerializer
 from .models import CustomUser
+from courses.models import Slides
 from django.dispatch import receiver
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
+
+GUEST_USER_EMAIL = "guestuser@dataexpert.io"
 
 
 class LoginView(APIView):
@@ -22,6 +25,9 @@ class LoginView(APIView):
         user = authenticate(email=email, password=password)
         if user is not None:
             if user.is_active:
+                if email == GUEST_USER_EMAIL:
+                    user = CustomUser.objects.get(email=GUEST_USER_EMAIL)
+                    Slides.objects.filter(user_id=user).delete()
                 login(request, user)
                 return Response("User logged in successfully.", status=status.HTTP_200_OK)
             else:
@@ -46,7 +52,7 @@ class CustomUserCreate(APIView):
     """
     permission_classes = (permissions.AllowAny,)
 
-    def post(self, request, format='json'):
+    def post(self, request):
         if not request.data:
             return Response("Please enter a name, email address, and password.", status=status.HTTP_400_BAD_REQUEST)
         data = {

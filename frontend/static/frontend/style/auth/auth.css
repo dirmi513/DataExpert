@@ -1,66 +1,66 @@
 .auth-container {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    opacity: 0.5;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
 }
 
 .auth-form-animate {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 400px;
-    width: 300px;
-    padding: 15px;
-    background: white;
-    border: solid white 1px;
-    border-radius: 5px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 1050;
-    animation-name: animateRight;
-    animation-duration: 0.4s;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 400px;
+  width: 300px;
+  padding: 15px;
+  background: white;
+  border: solid white 1px;
+  border-radius: 5px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1050;
+  animation-name: animateRight;
+  animation-duration: 0.4s;
 }
 
 @keyframes animateRight {
-    from {left: 75%; opacity: 0}
-    to {left: 50%; opacity: 1}
+  from {left: 75%; opacity: 0}
+  to {left: 50%; opacity: 1}
 }
 
 .auth-form {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 400px;
-    width: 300px;
-    padding: 15px;
-    background: white;
-    border: solid white 1px;
-    border-radius: 5px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index: 1050;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 400px;
+  width: 300px;
+  padding: 15px;
+  background: white;
+  border: solid white 1px;
+  border-radius: 5px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1050;
 }
 
 .auth-form .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
 }
 
 .auth-form .form-control:focus {
-    z-index: 2;
+  z-index: 2;
 }

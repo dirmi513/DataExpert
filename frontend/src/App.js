@@ -1,5 +1,4 @@
 import React from "react"
-import Blog from "./components/landing/Blog"
 import Courses from "./components/landing/Courses"
 import CoursesApp from "./components/app/CoursesApp"
 import Slide from "./components/app/slide/Slide"
@@ -8,7 +7,7 @@ import Homepage from "./components/landing/Homepage"
 import PasswordResetConfirm from "./components/authentication/PasswordResetConfirm"
 import {
 	COURSES_APP_URI, GET_COURSES_APP_SLIDE_URI, HOMEPAGE_URI,
-	LOGOUT_URI, PASSWORD_RESET_URI, COURSES_LANDING_PAGE_URI, BLOG_LANDING_PAGE_URI
+	LOGOUT_URI, PASSWORD_RESET_URI, COURSES_LANDING_PAGE_URI
 } from "./GlobalVariables"
 import {Switch, Route} from "react-router-dom"
 import "@babel/polyfill"
@@ -33,10 +32,6 @@ const App = () => {
 
 			<Route exact path={COURSES_LANDING_PAGE_URI}>
 				<Courses />
-			</Route>
-
-			<Route exact path={BLOG_LANDING_PAGE_URI}>
-				<Blog />
 			</Route>
 
 			<Route exact path={COURSES_APP_URI}>
