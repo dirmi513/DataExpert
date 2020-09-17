@@ -1,0 +1,247 @@
+.bottomRightPane {
+  height:70%;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+}
+
+/* Execute Code & Submit Answer Buttons */
+.buttons-holder {
+  position: relative;
+  height: 10%;
+  border-top: solid 1px white;
+  border-bottom: solid 1px white;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.button.lambda {
+  width: 140px;
+  height: 35px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-weight: 500;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.button.lambda:hover {
+  background-color: #2EE59D;
+  color: white;
+}
+
+.spinner-border.spinner-border-sm {
+  margin: 0 5px 0 0 !important;
+}
+
+#execute-code {
+  margin-left: 10px;
+  margin-right: 15px;
+}
+
+#submit-answer {
+  margin-right: 5px;
+}
+
+.restore{
+  background: black;
+  color: #2EE59D;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.restore:active {
+  border: 1px solid white;
+}
+
+/*.restore:focus {*/
+/*    outline: none;*/
+/*}  */
+
+.modal-header {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/*.modal-header button.close:focus { */
+/*    outline: 0 !important; */
+/*}*/
+
+.modal-body {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 17px;
+}
+
+.restore-code-modal-button {
+  font-family: 'PT Sans', sans-serif;
+  font-size: 16px;
+  background-color: #02203c;
+  border: none !important;
+}
+
+/*.restore-code-modal-button:hover {*/
+/*    background-color: #02203c !important;*/
+/*}*/
+
+/*.restore-code-modal-button:active {*/
+/*    background-color: #02203c !important;*/
+/*}*/
+
+
+
+/* END Execute Code & Submit Answer Buttons */
+
+
+
+/* User code output portion */
+.code-output {
+  position: relative;
+  max-height: 90%;
+  height: 90%;
+  overflow: auto;
+}
+
+
+hr#hr-right-pane {
+  height: 1px;
+  background: white;
+  border:none;
+  margin: 0 0 0 0;
+}
+
+.traceback-output {
+  color: red;
+}
+
+pre {
+  font-family: Monaco;
+  font-size: 14px;
+  color: white;
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+
+.output-text-p {
+  color: white;
+  font-family: Monaco;
+  font-size: 14px;
+  margin: 5px 15px 5px 15px;
+}
+
+.dataframe table {
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.dataframe tr  {
+  text-align: center;
+  font-family: Monaco;
+  font-size: 14px;
+}
+
+.dataframe th {
+  text-align: center;
+  padding: .5em 1em .5em 1em;
+  font-family: Monaco;
+  font-size: 14px;
+}
+
+.dataframe td {
+  text-align: right;
+  padding: .5em 1em .5em 1em;
+  font-family: Monaco;
+  font-size: 14px;
+}
+
+table.dataframe > thead{
+  border: 1px solid white;
+}
+
+table.dataframe > tbody > tr > th {
+  border: 1px solid white;
+}
+
+table.dataframe > tbody > tr > td {
+  border: 1px solid white;
+}
+
+.code-output-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 17px;
+  color: #7AA6DA;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+/* User's code output: Variable Dropdown */
+/* Created by Chuka */
+.main {
+  color: white;
+  font-family: Monaco;
+  font-size: 14px;
+}
+
+.main > .arrow {
+  stroke: white;
+  fill: white;
+  stroke-width: 1px;
+  color: white;
+  margin-right: 5px;
+  margin-left: 15px;
+}
+
+.main.active > .arrow {
+  transform: rotate(90deg);
+}
+
+.main > .type {
+  display: none;
+}
+
+.main > .result {
+  display: none;
+}
+
+.main.active > .type {
+  display: inline-block;
+}
+
+.main.active > .result {
+  display: block;
+}
+
+.main {
+  margin-bottom: 15px;
+}
+
+.active {
+  margin-bottom: 1px;
+}
+
+span.type {
+  color: white;
+  font-family: Monaco;
+  font-size: 14px;
+}
+
+div.result {
+  color: white;
+  font-family: Monaco;
+  font-size: 14px;
+  margin: 10px 0px 20px 50px;
+}
+/* End User's code output: Variable Dropdown */

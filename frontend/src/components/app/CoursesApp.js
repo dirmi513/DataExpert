@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import {Link} from "react-router-dom"
 import TopNav from "./TopNav"
-import "../../../static/frontend/style/courses.css"
+import "../../../static/frontend/style/app/courses.css"
 import "../../../static/frontend/style/loadingDots.css"
 import SimpleBarReact from "simplebar-react"
 import "simplebar/src/simplebar.css"

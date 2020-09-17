@@ -1,5 +1,5 @@
 import React from "react"
-import "../../../../../../../static/frontend/style/slide/leftPaneHintButton.css"
+import "../../../../../../../static/frontend/style/app/slide/leftPaneHintButton.css"
 
 const LeftPaneHintButton = (props) => {
 

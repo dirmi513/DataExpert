@@ -1,5 +1,5 @@
 import React from "react"
-import "../../../../../../../static/frontend/style/slide/leftPaneBody.css"
+import "../../../../../../../static/frontend/style/app/slide/leftPaneBody.css"
 
 
 const LeftPaneBody = (props) => {

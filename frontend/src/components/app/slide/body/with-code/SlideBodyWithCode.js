@@ -5,7 +5,7 @@ import TextEditor from "./right-pane/TextEditor"
 import SubmitAnswerCorrect from "./right-pane/SubmitAnswerCorrect"
 import SubmitAnswerWrong from "./right-pane/SubmitAnswerWrong"
 import {loadPageSplitScripts, removePageSplitScripts} from "../../../../../../static/frontend/scripts/loadPageSplitScripts"
-import "../../../../../../static/frontend/style/slide/slideBody.css"
+import "../../../../../../static/frontend/style/app/slide/slideBody.css"
 import SimpleBarReact from "simplebar-react"
 import "simplebar/src/simplebar.css"
 

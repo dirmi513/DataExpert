@@ -23,6 +23,14 @@ class CourseLessonSlideMaster(models.Model):
         return f'{self.cls}: {self.course}, {self.lesson}, {self.slide}'
 
 
+class CourseSummary(models.Model):
+    """
+    Contains a single row for every course and contains a summary of that course.
+    """
+    cls = models.IntegerField(primary_key=True)
+    summary = models.TextField(default=None, blank=True, null=True)
+
+
 class Slides(models.Model):
     """
     For each user, there will be a record in this table with their code

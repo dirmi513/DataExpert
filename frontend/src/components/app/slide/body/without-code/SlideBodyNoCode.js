@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from "react"
 import SimpleBarReact from "simplebar-react"
-import "../../../../../../static/frontend/style/slide/slideBody.css"
+import "../../../../../../static/frontend/style/app/slide/slideBody.css"
 
 
 const SlideBodyNoCode = (props) => {

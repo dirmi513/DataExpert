@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react"
 import AceEditor from "react-ace"
 import "../../../../../../../static/frontend/ace/src-noconflict/mode-python"
 import "../../../../../../../static/frontend/ace/src-noconflict/theme-terminal"
-import "../../../../../../../static/frontend/style/slide/textEditor.css"
+import "../../../../../../../static/frontend/style/app/slide/textEditor.css"
 
 const TextEditor = (props) => {
 	const [userCode, setUserCode] = useState(props.code)

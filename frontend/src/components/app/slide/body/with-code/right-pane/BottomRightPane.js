@@ -3,7 +3,7 @@ import RestoreCodeModal from "./RestoreCodeModal"
 import lambdaOutput from "../../../../../../../static/frontend/scripts/lambdaOutput"
 import codeOutput from "../../../../../../../static/frontend/scripts/codeOutput"
 import SimpleBarReact from "simplebar-react"
-import "../../../../../../../static/frontend/style/slide/bottomRightPane.css"
+import "../../../../../../../static/frontend/style/app/slide/bottomRightPane.css"
 
 
 

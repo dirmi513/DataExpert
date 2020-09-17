@@ -5,8 +5,8 @@ import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest"
 import "../../../static/frontend/style/auth/login.css"
 import "../../../static/frontend/style/auth/auth.css"
 import {
-	COURSES_APP_URI, GET_COURSES_APP_SLIDE_URI, HOMEPAGE_URI, GET_COURSES_APP_INFO_URI,
-	LOGOUT_URI, PASSWORD_RESET_URI, COURSES_LANDING_PAGE_URI, BLOG_LANDING_PAGE_URI, LOGIN_URI
+	COURSES_APP_URI, GET_COURSES_APP_INFO_URI, LOGIN_URI,
+  GUEST_EMAIL, GUEST_PASSWORD
 } from "../../GlobalVariables"
 
 
@@ -30,7 +30,7 @@ const Login = (props) => {
 
 	const handleChange = (event) => {
 		const name = event.target.name
-		const val = event.target.value 
+		const val = event.target.value
 		if(name === "email") {
 			setEmail(val)
 		} else if(name === "password") {
@@ -38,19 +38,22 @@ const Login = (props) => {
 		}
 	}
 
-	const handleSubmit = async (event) => {
+	const loginRequest = async (userEmail, userPwd) => {
+    const data = {
+      email: userEmail,
+      password: userPwd
+    }
+    const response = await fetchPostRequest(LOGIN_URI, data)
+    if(response.status === 200) {
+      window.location.href = COURSES_APP_URI
+    }else if(response.status === 401) {
+      setIncorrectInfo(true)
+    }
+  }
+
+	const handleSubmit = (event) => {
 		event.preventDefault()
-		const url = LOGIN_URI
-		const data = {
-			email: email,
-			password: password
-		}
-		const response = await fetchPostRequest(url, data)
-		if(response.status === 200) {
-			window.location.href = COURSES_APP_URI
-		}else if(response.status === 401) {
-			setIncorrectInfo(true)
-		}
+    loginRequest(email, password)
 	}
 
 	const handleIncorrectInfo = (event, bool) => {
@@ -87,6 +90,11 @@ const Login = (props) => {
 		setSignup(bool)
 	}
 
+	const handleGuestLogin = (event) => {
+	  event.preventDefault()
+    loginRequest(GUEST_EMAIL, GUEST_PASSWORD)
+  }
+
 	return (
 		<>
 		<div className="auth-container" onClick={() => props.updateLogIn()}/>
@@ -100,15 +108,23 @@ const Login = (props) => {
 				<h1 className="h3 mb-3 font-weight-normal">
 					Please Login
 				</h1>
-				<p>
-					Need an account?
-					<a
-						href="#"
-						onClick={(e) => {submitClick(e, true)}}
-					>
-						Sign up
-					</a>
-				</p>
+				<p style={{marginBottom:"10px"}}>
+          Need an account?&nbsp;
+          <a
+            href="#"
+            onClick={(e) => {submitClick(e, true)}}
+          >
+            Sign up
+          </a>
+          <br/>
+          <a
+            href="#"
+            onClick={(e) => {handleGuestLogin(e)}}
+            style={{marginTop:"10px"}}
+          >
+            GUEST LOGIN
+          </a>
+        </p>
 				<input
 					type="email"
 					className="form-control"
@@ -126,7 +142,7 @@ const Login = (props) => {
 					required />
 				{logInError()}
 				<p>
-					Forgot your password?
+					Forgot your password?&nbsp;
 					<a
 						href="#"
 						onClick={(e) => handleResetPasswordClick(e, true)}

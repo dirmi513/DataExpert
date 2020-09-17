@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import {Link} from "react-router-dom"
 import codeUpdate from "../../../../static/frontend/scripts/codeUpdate"
-import "../../../../static/frontend/style/navbar.css"
+import "../../../../static/frontend/style/app/navbar.css"
 import {
 	COURSES_APP_URI, LOGOUT_URI,
 } from "../../../GlobalVariables"

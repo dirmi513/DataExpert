@@ -1,6 +1,6 @@
 import React, {useEffect} from "react"
 import codeUpdate from "../../../../../../../static/frontend/scripts/codeUpdate"
-import "../../../../../../../static/frontend/style/slide/submitAnswerResult.css"
+import "../../../../../../../static/frontend/style/app/slide/submitAnswerResult.css"
 
 const SubmitAnswerCorrect = (props) => {
 

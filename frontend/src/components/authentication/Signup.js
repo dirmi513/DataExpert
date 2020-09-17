@@ -1,22 +1,23 @@
 import React, {useState} from "react"
-import {Link} from "react-router-dom"
-import TopBanner from "../landing/TopBanner"
 import "../../../static/frontend/style/auth/signup.css"
 import "../../../static/frontend/style/auth/auth.css"
 import fetchPostRequest from "../../../static/frontend/scripts/fetchPostRequest";
+import {
+  SIGNUP_URL
+} from "../../GlobalVariables"
 
 
 const Signup = (props) => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const [name, setName] = useState("")
-	const BASE_URL = "http://localhost:8000"
 	const [incorrectInfo, setIncorrectInfo] = useState(false)
 	const [incorrectInfoMessage, setIncorrectInfoMessage] = useState("")
+  const [signUpSuccess, setSignUpSuccess] = useState(false)
 
 	const handleChange = (event) => {
 		const name = event.target.name
-		const val = event.target.value 
+		const val = event.target.value
 		if(name === "email") {
 			setEmail(val)
 		}else if(name === "password") {
@@ -28,15 +29,14 @@ const Signup = (props) => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault()
-		const url = `${BASE_URL}/api/user/create/`
 		const data = {
 			email: email,
 			password: password,
 			name: name
 		}
-		const response = await fetchPostRequest(url, data)
+		const response = await fetchPostRequest(SIGNUP_URL, data)
 		if(response.status === 201) {
-			window.location.href = "/login/"
+      setSignUpSuccess(true)
 		}else if(response.status === 400) {
 			const errorMessage = await response.json()
 			setIncorrectInfoMessage(errorMessage)
@@ -49,6 +49,11 @@ const Signup = (props) => {
 		setIncorrectInfo(bool)
 	}
 
+	const handleSuccessfulLogin = (event) => {
+    props.resetFunc(event, false)
+    setSignUpSuccess(false)
+  }
+
 	const handleIncorrectInfo = () => {
 		if (incorrectInfo) {
 			return (
@@ -58,7 +63,17 @@ const Signup = (props) => {
 					<a href="#" onClick={(e) => setIncorrectInfoHandler(e, false)}>Try again</a>
 				</p>
 			)
-		}
+		} else if (signUpSuccess) {
+      return (
+        <p style={{marginTop:"10px"}}>
+          You have successfully signed up. Please&nbsp;
+          <a href="#" onClick={(e) => handleSuccessfulLogin(e)}>
+            Login
+          </a>
+          &nbsp;and start learning!
+        </p>
+      )
+    }
 		return (
 			<button className="btn btn-lg btn-primary btn-block" type="submit">
 				Sign up
