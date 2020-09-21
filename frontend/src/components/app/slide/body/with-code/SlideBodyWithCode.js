@@ -35,6 +35,7 @@ const SlideWithCode = (props) => {
 					slide={props.slide}
 					correctAnswer={props.correctAnswer}
 					html={props.html}
+          hint={props.hint}
 				/>
 			</SimpleBarReact>
 

@@ -27,7 +27,7 @@ class CourseSummary(models.Model):
     """
     Contains a single row for every course and contains a summary of that course.
     """
-    cls = models.IntegerField(primary_key=True)
+    courseNumber = models.IntegerField(primary_key=True)
     summary = models.TextField(default=None, blank=True, null=True)
 
 

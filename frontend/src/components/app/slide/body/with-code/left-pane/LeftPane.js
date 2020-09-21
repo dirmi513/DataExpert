@@ -16,9 +16,9 @@ const LeftPane = (props) => {
 	}
 
 	const setHintAnswer = (val, bool) => {
-		if(val == "hint") {
+		if(val === "hint") {
 			setShowHint(bool)
-		}else if(val == "answer") {
+		}else if(val === "answer") {
 			setShowCorrectAnswer(bool)
 		}
 	}
@@ -45,7 +45,7 @@ const LeftPane = (props) => {
 				<>
 					<hr id="hr-hint-answer"/>
 					<h4 id="head-hint-answer">Hint</h4>
-					<p id="p-hint">PROPS.HINT</p>
+					<p id="p-hint">{props.hint}</p>
 				</>
 		}else if(showCorrectAnswer) {
 			const maxLines = props.correctAnswer.split("\n").length

@@ -1,5 +1,4 @@
 import React from "react"
-import Courses from "./components/landing/Courses"
 import CoursesApp from "./components/app/CoursesApp"
 import Slide from "./components/app/slide/Slide"
 import Logout from "./components/authentication/Logout"
@@ -28,10 +27,6 @@ const App = () => {
 
 			<Route exact path={PASSWORD_RESET_URI}>
 				<PasswordResetConfirm />
-			</Route>
-
-			<Route exact path={COURSES_LANDING_PAGE_URI}>
-				<Courses />
 			</Route>
 
 			<Route exact path={COURSES_APP_URI}>

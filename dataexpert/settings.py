@@ -94,8 +94,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dataexpert', 
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'HOST': 'dataexpert.ccckhmbuqnag.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
+        'USER': 'dataexpert',
+        'PASSWORD': os.environ['DATAEXPERT_RDS_PASSWORD']
     }
 }
 
