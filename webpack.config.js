@@ -1,6 +1,5 @@
 
 module.exports = {
-	mode: 'development',
 	entry: [
 		'babel-polyfill',
 		'src/index.js'
@@ -17,7 +16,7 @@ module.exports = {
 			{
 				test: /\.css/,
 				use: [
-					"style-loader", 
+					"style-loader",
 					"css-loader"
 				]
 			}
