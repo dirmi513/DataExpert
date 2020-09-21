@@ -32,6 +32,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 os.makedirs(STATIC_ROOT, exist_ok=True)
+os.makedirs(os.path.join(BASE_DIR, 'static'), exist_ok=True)
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
