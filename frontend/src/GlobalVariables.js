@@ -3,7 +3,7 @@
 *
 * */
 
-const DATAEXPERT_URL = "http://localhost:8000";
+const DATAEXPERT_URL = process.env.API_URL;
 
 const COURSES_APP_URI = "/app/courses";
 

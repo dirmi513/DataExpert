@@ -8,9 +8,10 @@ from django.dispatch import receiver
 from django_rest_passwordreset.signals import reset_password_token_created
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
+import os
 
 GUEST_USER_EMAIL = 'guestuser@dataexpert.io'
-DATAEXPERT_URL = 'http://localhost:8000/'
+DATAEXPERT_URL = os.environ['DATAEXPERT_URL']
 
 
 class LoginView(APIView):
