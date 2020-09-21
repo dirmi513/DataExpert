@@ -1,19 +1,20 @@
-import React from "react"  
+import React from "react"
 import SlideBodyWithCode from "./with-code/SlideBodyWithCode"
-import SlideBodyNoCode from "./without-code/SlideBodyNoCode" 
+import SlideBodyNoCode from "./without-code/SlideBodyNoCode"
 
 
-const SlideBody = (props) => {   
+const SlideBody = (props) => {
 	return (
 		<>
 		{
 			props.coded == "T" ?
-			<SlideBodyWithCode 
+			<SlideBodyWithCode
 				code={props.code}
 				course={props.course}
 				lesson={props.lesson}
 				slide={props.slide}
 				correctAnswer={props.correctAnswer}
+        hint={props.hint}
 				html={props.html}
 				lessonData={props.lessonData}
 				get={props.get}
@@ -21,13 +22,13 @@ const SlideBody = (props) => {
 				nextSlideURL={props.nextSlideURL}
 				coded={props.coded}
 			/> :
-			<SlideBodyNoCode 
+			<SlideBodyNoCode
 				html={props.html}
 				slide={props.slide}
 			/>
 		}
 		</>
-	) 
+	)
 }
 
 export default SlideBody

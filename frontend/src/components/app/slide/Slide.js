@@ -105,6 +105,7 @@ const Slide = (props) => {
 					lesson={slideData.data.lesson}
 					slide={slideData.data.slide}
 					correctAnswer={slideData.data.correct_answer}
+          hint={slideData.data.hint}
 					lessonData={lessonData.data}
 					get={getSlideData}
 					update={codeUpdate}

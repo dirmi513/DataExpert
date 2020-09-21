@@ -28,7 +28,7 @@ const CoursesApp = () => {
 					</div>
 					<div className="course-summary">
 						<p>
-							SUMMARY HERE
+              {course["summary"]}
 						</p>
 					</div>
 					<ul className="lessons">
@@ -75,11 +75,10 @@ const CoursesApp = () => {
 		{
 			courseData.length > 0 ?
 			<div className="courses-container">
-				<SimpleBarReact className="course-boxes">
-					<div className="course-boxes">
-						{unpackCoursesObject(courseData[0].courses)}
-					</div>
-				</SimpleBarReact>
+				<div className="course-boxes">
+          <h1 className="title">Courses:</h1>
+          {unpackCoursesObject(courseData[0].courses)}
+				</div>
 			</div> :
 			<div className="loading-dots">
 				<span></span>

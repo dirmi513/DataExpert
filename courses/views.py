@@ -8,7 +8,8 @@ from rest_framework.generics import GenericAPIView, ListAPIView
 from rest_framework import status
 from .serializers import \
     CourseLessonSlideMasterSerializer, CorrectAnswerToS3Serializer, UpdateHTMLBodySerializer
-from rest_framework.response import Response  
+from rest_framework.response import Response
+from .models import CourseSummary as CS, CourseLessonSlideMaster as CLSM, Slides
 
 ENVIRONMENT = 'dev'
 
@@ -125,7 +126,8 @@ def course_info(request):
     for i, course in enumerate(courses):
         course_dic = {
             'course': course, 
-            'key': i+1
+            'key': i+1,
+            'summary': CS.objects.get(courseNumber=i+1).summary
         } 
         lesson_list = []
         distinct_lessons = CLSM.objects.filter(course=course).values('lesson', 'lessonNumber').distinct()
@@ -203,6 +205,7 @@ def get_lesson_data(request, course, lesson, slide):
         html_body = clsm_instance.htmlBody
         coded = clsm_instance.codedSlide
         correct_ans = clsm_instance.correctAnswer
+        hint = clsm_instance.hint
         # If there is no current record in the slides table for this cls + user combo, create one
         create_slides_record_for_user(_cls, user_id, default_code)
         # What code to display in the text editor
@@ -210,6 +213,7 @@ def get_lesson_data(request, course, lesson, slide):
         # Bottom nav data
         bottom_nav = slide_bottom_nav(slide_num, num_slides, slide_instances, str(_cls))
         data = {
+            "hint": hint,
             "correct_answer": correct_ans,
             "slide": s,
             "code": code,
