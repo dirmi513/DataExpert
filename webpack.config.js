@@ -1,6 +1,4 @@
-const webpack = require('webpack');
-
-module.exports = env => {
+module.exports = () => {
   return {
     entry: [
       'babel-polyfill',
@@ -23,11 +21,6 @@ module.exports = env => {
           ]
         }
       ]
-    },
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env.URL': JSON.stringify(env.URL)
-      })
-    ]
+    }
   }
 }

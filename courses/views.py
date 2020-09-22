@@ -50,9 +50,10 @@ class HTMLBody(ListAPIView):
 
     For the GET request, you must specify the cls as a
     parameter when hitting the REST endpoint:
-        e.g. http://localhost:8000/courses/api/get-html-body?cls=111
+        e.g. http://www.dataexpert.io/app/courses/slide/htmlBody?cls=111
     """
     permission_classes = (IsAdminUser, )
+    serializer_class = UpdateHTMLBodySerializer
 
     def get_queryset(self):
         _cls = self.request.query_params.get('cls')
@@ -78,13 +79,6 @@ class HTMLBody(ListAPIView):
         except Exception as e:
             return Response(f"There was an error updating the slide's htmlBody: {str(e)}",
                             status=status.HTTP_400_BAD_REQUEST)
-
-    def get_serializer_class(self):
-        http_method = self.request.method
-        if http_method == "GET":
-            return CourseLessonSlideMasterSerializer
-        elif http_method == "PUT":
-            return UpdateHTMLBodySerializer
 
 
 class CorrectAnswerToS3(GenericAPIView):

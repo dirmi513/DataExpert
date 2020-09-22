@@ -8,8 +8,7 @@ urlpatterns = [
     path('slide/code', views.code_update),
     path('slide/completed', views.set_slide_no_code_completed),
     path('slide/htmlBody', views.HTMLBody.as_view()),
-    path('slide/htmlBody', views.HTMLBody.as_view()),
     path('code/execute', views.code_execution),
     path('code/restore', views.restore_code),
-    path('slide/answer/s3', views.CorrectAnswerToS3.as_view())
+    path('slide/s3', views.CorrectAnswerToS3.as_view())
 ] 
