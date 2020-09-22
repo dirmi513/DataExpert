@@ -3,7 +3,7 @@
 *
 * */
 
-const DATAEXPERT_URL = process.env.API_URL;
+const DATAEXPERT_URL = "www.dataexpert.io";
 
 const COURSES_APP_URI = "/app/courses";
 

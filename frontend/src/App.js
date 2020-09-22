@@ -6,7 +6,7 @@ import Homepage from "./components/landing/Homepage"
 import PasswordResetConfirm from "./components/authentication/PasswordResetConfirm"
 import {
 	COURSES_APP_URI, GET_COURSES_APP_SLIDE_URI, HOMEPAGE_URI,
-	LOGOUT_URI, PASSWORD_RESET_URI, COURSES_LANDING_PAGE_URI
+	LOGOUT_URI, PASSWORD_RESET_URI
 } from "./GlobalVariables"
 import {Switch, Route} from "react-router-dom"
 import "@babel/polyfill"
