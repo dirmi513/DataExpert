@@ -99,11 +99,11 @@ WSGI_APPLICATION = 'dataexpert.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dataexpert', 
-        'HOST': 'dataexpert.ccckhmbuqnag.us-east-1.rds.amazonaws.com',
-        'PORT': '5432',
-        'USER': 'dataexpert',
-        'PASSWORD': os.environ['DATAEXPERT_RDS_PASSWORD']
+        'NAME': os.environ.get('DATABASE_NAME'),
+        'USER': os.environ.get('DATABASE_USER'),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': os.environ.get('DATABASE_HOST'),
+        'PORT': '5432'
     }
 }
 db_from_env = dj_database_url.config(conn_max_age=600)
