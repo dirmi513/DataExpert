@@ -13,9 +13,9 @@ const GET_COURSES_APP_SLIDE_URI = `/:course/:lesson/:slide`;
 
 const HOMEPAGE_URI = "/";
 
-const LOGOUT_URI = "/auth/logout";
+const LOGOUT_URI = "/logout";
 
-const LOGOUT_URL = `${DATAEXPERT_URL}${LOGOUT_URI}`;
+const LOGOUT_URL = `${DATAEXPERT_URL}/auth/logout`;
 
 const LOGIN_URI = "/auth/login";
 
