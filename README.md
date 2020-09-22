@@ -1,4 +1,4 @@
-# [DataExpert.io](www.dataexpert.io)
+# [DataExpert.io](http://www.dataexpert.io)
 
 A full stack interactive e-learning web application that teaches people how to code in Python. 
 
