@@ -15,13 +15,13 @@ const HOMEPAGE_URI = "/";
 
 const LOGOUT_URI = "/logout";
 
-const LOGOUT_URL = `${DATAEXPERT_URL}/auth/logout`;
+const LOGOUT_URL = `/auth/logout`;
 
 const LOGIN_URI = "/auth/login";
 
 const SIGNUP_URI = "/auth/users";
 
-const SIGNUP_URL = `${DATAEXPERT_URL}${SIGNUP_URI}`;
+const SIGNUP_URL = SIGNUP_URI;
 
 const PASSWORD_RESET_URI = "/reset-password/:token";
 
