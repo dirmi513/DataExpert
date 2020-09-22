@@ -15,7 +15,7 @@ const HOMEPAGE_URI = "/";
 
 const LOGOUT_URI = "/logout";
 
-const LOGOUT_URL = `${DATAEXPERT_URL}/auth/logout`;
+const LOGOUT_URL = `/auth/logout`;
 
 const LOGIN_URI = "/auth/login";
 
