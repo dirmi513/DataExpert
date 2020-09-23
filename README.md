@@ -20,15 +20,19 @@ For this project, I have set up React in its own "frontend" Django app. When Dja
 ## How to Enjoy
 
 Sign up and create a new profile:
+
 ![](https://s3.amazonaws.com/dataexpert.images/Media/signup.png)
 
 Then login, or choose to login as a guest:
+
 ![](https://s3.amazonaws.com/dataexpert.images/Media/login.png)
 
 You will be routed to the courses page, which contains details on the available course(s), as well as links to the
  lessons within that course in chronological order:
+
 ![](https://s3.amazonaws.com/dataexpert.images/Media/courses.png)
 
 Finally, after selecting one of the lessons, you will be brought to the most recent slide within that lesson that you
  have not yet completed, and you can now take it from here.  Happy coding!
+
 ![](https://s3.amazonaws.com/dataexpert.images/Media/slide.png)
