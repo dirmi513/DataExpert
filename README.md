@@ -15,6 +15,7 @@ Tech stack:
     * JavaScript and the React web framework
     * [Course Content Repository](https://github.com/dirmi513/DataExpert-Material)
 
+For this project, I have set up React in its own "frontend" Django app. When Django starts up, it loads a single HTML template, and then React manages the frontend from there.
 
 ## How to Enjoy
 
