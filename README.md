@@ -5,7 +5,7 @@ A full stack interactive e-learning web application that teaches people how to c
 Tech stack:
 * Backend consists of 
    * Django web framework coupled with Django Rest Framework
-   * User code executor [service](https://github.com/dirmi513/DataExpert-Code-Executor-Lambdas) created with the serverless framework. The service utilizes AWS Lambda and S3 to execute Python code 
+   * [User code executor service](https://github.com/dirmi513/DataExpert-Code-Executor-Lambdas) created with the serverless framework. The service utilizes AWS Lambda and S3 to execute Python code 
    * An AWS RDS PostgreSQL instance as the database
    * AWS S3 buckets for storing media and pertinent files such as datasets and coding challenge answers
 * Frontend consists of 
