@@ -4,16 +4,15 @@ A full stack interactive e-learning web application that teaches people how to c
 
 Tech stack:
 * Backend consists of 
-    * Django web framework coupled with Django Rest Framework
-    * An [AWS Lambda function](https://github.com/dirmi513/DataExpert-Code-Executor-Lambdas) that executes Python
-     code
-     * An AWS RDS PostgreSQL instance as the database
-     * AWS S3 buckets for storing media and pertinent files such as datasets and coding challenge answers
+   * Django web framework coupled with Django Rest Framework
+   * User code executor [service](https://github.com/dirmi513/DataExpert-Code-Executor-Lambdas) created with the serverless framework. The service utilizes AWS Lambda and S3 to execute Python code 
+   * An AWS RDS PostgreSQL instance as the database
+   * AWS S3 buckets for storing media and pertinent files such as datasets and coding challenge answers
 * Frontend consists of 
-    * HTML
-    * CSS
-    * JavaScript and the React web framework
-    * [Course Content Repository](https://github.com/dirmi513/DataExpert-Material)
+   * HTML
+   * CSS
+   * JavaScript and the React web framework
+   * [Course Content Repository](https://github.com/dirmi513/DataExpert-Material)
 
 For this project, I have set up React in its own "frontend" Django app. When Django starts up, it loads a single HTML template, and then React manages the frontend from there.
 
