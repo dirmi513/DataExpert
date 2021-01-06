@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "ace-builds": "^1.4.9",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "e": "0.0.4",
     "js-cookie": "^2.2.1",
